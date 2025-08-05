@@ -12,6 +12,8 @@ namespace ShoseShop.Data
         public DateTime NgayBatDau { get; set; }
         public DateTime NgayKetThuc { get; set; }
         public int PhanTramGiam { get; set  ; } // Mức giảm giá, có thể là phần trăm hoặc số tiền cụ thể
-        public virtual ICollection<ChiTietKhuyenMai> ChiTietKMs { get; set; } = new List<ChiTietKhuyenMai>();
+        public virtual ICollection<SanPham> SanPhams { get; set; } = new List<SanPham>();
+
+        public virtual ICollection<ChiTietKhuyenMai> ChiTietKhuyenMais { get; set; } = new List<ChiTietKhuyenMai>();
     }
 }

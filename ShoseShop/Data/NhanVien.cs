@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -15,6 +17,9 @@ namespace ShoseShop.Data
 
 
         public string TenNV { get; set; } // Tên nhân viên
+
+        [Index]
+        [MaxLength(255)] // BẮT BUỘC nếu dùng Index trên string
         public string Email { get; set; } // Email của nhân viên
         public string SoDienThoai { get; set; } // Số điện thoại của nhân viên
         public DateTime NgaySinh { get; set; } // Ngày sinh của nhân viên
@@ -25,7 +30,7 @@ namespace ShoseShop.Data
         public DateTime NgayVaoLam { get; set; } // Ngày vào làm của nhân viên
         public bool TrangThai { get; set; } // Trạng thái làm việc (true: đang làm, false: đã nghỉ việc)
 
-        public virtual ICollection<PhieuMua> Phieumuas { get; set; } = new List<PhieuMua>();
+        public virtual ICollection<PhieuMua> PhieuMuas { get; set; } = new List<PhieuMua>();
     
 }
 }

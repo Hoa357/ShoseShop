@@ -16,10 +16,11 @@ namespace ShoseShop.Data
         public DateTime NgaySinh { get; set; }
         public decimal TongXu { get; set; }
 
-        public virtual ICollection<SoDiaChi> MaSoDC { get; set; } = new List<SoDiaChi>();
+        public virtual ICollection<SoDiaChi> MaSoDCs { get; set; } = new List<SoDiaChi>();
 
         public virtual ICollection<BinhLuan> Binhluans { get; set; } = new List<BinhLuan>();
 
+       
         public virtual TaiKhoan EmailNavigation { get; set; }
 
         public virtual ICollection<PhieuMua> Phieumuas { get; set; } = new List<PhieuMua>();
