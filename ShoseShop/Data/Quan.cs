@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -11,6 +12,7 @@ namespace ShoseShop.Data
     
      public string TenQuan { get; set; } // Tên quận
 
+        [Index]
         public int MaTinh { get; set; } // Mã tỉnh liên kết với quận
         public virtual Tinh MaTinhNavigation { get; set; } // Tỉnh liên kết với quận
         

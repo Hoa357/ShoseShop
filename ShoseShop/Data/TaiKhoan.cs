@@ -7,11 +7,11 @@ namespace ShoseShop.Data
 {
     public class TaiKhoan
     {
-        public int MaKhachHang { get; set; } // Mã tài khoản
-        public virtual KhachHang MaKHNavigation { get; set; } // Size liên kết với sản phẩm
+       
+        public virtual KhachHang KhachHangs { get; set; } // Size liên kết với sản phẩm
 
-        public int MaNhanVien { get; set; } // Mã tài khoản
-        public virtual NhanVien  MaNVNavigation { get; set; } // Size liên kết với sản phẩm
+      
+        public virtual NhanVien NhanViens { get; set; } // Size liên kết với sản phẩm
        public  string Email { get; set; }
         public int LoaiTK { get; set; }
     

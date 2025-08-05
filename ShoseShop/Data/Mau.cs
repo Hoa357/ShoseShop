@@ -9,7 +9,7 @@ namespace ShoseShop.Data
     {
         public int MaMau { get; set; } // Mã màu
         public string TenMau { get; set; } // Tên màu
-        public virtual ICollection<ChiTietSanPham> ChiTietSPs { get; set; } = new List<ChiTietSanPham>();
+        public virtual ICollection<ChiTietSanPham> ChiTietSanPhams { get; set; } = new List<ChiTietSanPham>();
 
         // Thêm các thuộc tính khác nếu cần thiết
     }
