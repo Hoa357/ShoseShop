@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ShoseShop.Data;
+using ShoseShop.InterfaceRepositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +10,27 @@ namespace ShoseShop.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
+           private readonly   ShoesDbContext _db; IKhuyenMai kmRepo;
+            public HomeController(ShoesDbContext db, IKhuyenMai km)
+            {
+                _db = db;
+                this.kmRepo = km;
+            }
+            public ActionResult Index()
+            {
+                var banners = _db.Banner.Where(b => b.Hoatdong).ToList();
+                int checkKm = kmRepo.GetAllKhuyenMaiToday("", "", 0, 0, 0, -1).Count == 0 ? 0 : 1;
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+               Session["Khuyenmai"] = checkKm;
 
-            return View();
-        }
+            return View(banners);
+            }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
 
-            return View();
+            public ActionResult Zalo()
+            {
+                return View();
+            }
+
         }
     }
-}

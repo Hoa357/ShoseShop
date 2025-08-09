@@ -1,4 +1,5 @@
 ﻿using ShoseShop.Data;
+using ShoseShop.InterfaceRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,10 @@ namespace ShoseShop.ViewModel
 {
     public class SanphamViewModel
     {
+      
         public SanPham sanpham { get; set; }
-        public List<ChiTietSanPham> sanphamcts { get; set; }
-        public List<string> tenSize { get; set; }
-        public List<int> slton { get; set; }
+        public int Phantramgiam { get; set; }
 
-    
-}
+
+    }
 }

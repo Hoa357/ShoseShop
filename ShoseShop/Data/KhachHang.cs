@@ -11,7 +11,7 @@ namespace ShoseShop.Data
         public string TenKhachHang { get; set; }
         public string Email { get; set; }
 
-        public string SoĐT { get ; set; }
+        public string Phone { get ; set; }
         public bool? GioiTinh { get; set; }
         public DateTime NgaySinh { get; set; }
         public decimal TongXu { get; set; }

@@ -52,7 +52,142 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNetCore.Antiforgery, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Antiforgery.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Antiforgery.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Abstractions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Abstractions.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Core, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Core.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authorization.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Authorization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization.Policy, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authorization.Policy.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Authorization.Policy.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Cryptography.Internal, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.Internal.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Cryptography.Internal.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.DataProtection, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.DataProtection.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.DataProtection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.DataProtection.Abstractions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.DataProtection.Abstractions.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.DataProtection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Diagnostics.Abstractions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Diagnostics.Abstractions.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Diagnostics.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Abstractions.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Server.Abstractions.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Html.Abstractions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Html.Abstractions.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Html.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Abstractions.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Extensions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Extensions.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Features.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.JsonPatch, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.JsonPatch.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.JsonPatch.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Abstractions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Abstractions.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Core, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Core.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.DataAnnotations, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.DataAnnotations.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.DataAnnotations.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Formatters.Json, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Formatters.Json.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Formatters.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.ViewFeatures, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.ViewFeatures.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.ViewFeatures.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.ResponseCaching.Abstractions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.ResponseCaching.Abstractions.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.ResponseCaching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Routing, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Routing.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Routing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Routing.Abstractions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Routing.Abstractions.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Routing.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.WebUtilities, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.WebUtilities.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.WebUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.DotNet.PlatformAbstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.DotNet.PlatformAbstractions.2.1.0\lib\net45\Microsoft.DotNet.PlatformAbstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=8.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.8.0.1\lib\net462\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.8.0.2\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyModel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyModel.2.1.0\lib\net451\Microsoft.Extensions.DependencyModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Diagnostics.Abstractions, Version=8.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Diagnostics.Abstractions.8.0.1\lib\net462\Microsoft.Extensions.Diagnostics.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions, Version=8.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Hosting.Abstractions.8.0.1\lib\net462\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Localization, Version=8.0.11.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Localization.8.0.11\lib\net462\Microsoft.Extensions.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Localization.Abstractions, Version=8.0.11.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Localization.Abstractions.8.0.11\lib\net462\Microsoft.Extensions.Localization.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.8.0.2\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.ObjectPool, Version=8.0.11.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.ObjectPool.8.0.11\lib\net462\Microsoft.Extensions.ObjectPool.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.8.0.2\lib\net462\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.8.0.0\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.WebEncoders, Version=8.0.11.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.WebEncoders.8.0.11\lib\net462\Microsoft.Extensions.WebEncoders.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Net.Http.Headers, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.Headers.2.3.0\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Registry.4.5.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.Bson.1.0.2\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -60,9 +195,52 @@
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.6.0\lib\net462\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.8.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Xml, Version=8.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Xml.8.0.2\lib\net462\System.Security.Cryptography.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.6.0\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -134,7 +312,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\FavouriteProductsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KhuyenMaiController.cs" />
+    <Compile Include="Controllers\PhieuMuaController.cs" />
+    <Compile Include="Controllers\SanPhamController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
+    <Compile Include="Controllers\TrackingOrderController.cs" />
+    <Compile Include="Data\Banner.cs" />
     <Compile Include="Data\BinhLuan.cs" />
     <Compile Include="Data\ChiTietKhuyenMai.cs" />
     <Compile Include="Data\ChiTietPhieuMua.cs" />
@@ -161,11 +348,38 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="InterfaceRepositories\IAddressNoteBook.cs" />
+    <Compile Include="InterfaceRepositories\IBinhLuan.cs" />
+    <Compile Include="InterfaceRepositories\IChiTietPhieuMua.cs" />
     <Compile Include="InterfaceRepositories\IChiTietSanPham.cs" />
+    <Compile Include="InterfaceRepositories\IEmailSender.cs" />
+    <Compile Include="InterfaceRepositories\IKhachHang.cs" />
+    <Compile Include="InterfaceRepositories\IKhuyenMai.cs" />
+    <Compile Include="InterfaceRepositories\IMau.cs" />
+    <Compile Include="InterfaceRepositories\IPhieuMua.cs" />
+    <Compile Include="InterfaceRepositories\IPhuongthucthanhtoan.cs" />
+    <Compile Include="InterfaceRepositories\ISanPham.cs" />
     <Compile Include="InterfaceRepositories\ISanPhamSize.cs" />
     <Compile Include="InterfaceRepositories\ISize.cs" />
     <Compile Include="InterfaceRepositories\IVoucher.cs" />
+    <Compile Include="Migrations\202508081033336_setDbSet.cs" />
+    <Compile Include="Migrations\202508081033336_setDbSet.Designer.cs">
+      <DependentUpon>202508081033336_setDbSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewComponents\AddressBookViewComponent.cs" />
+    <Compile Include="ViewComponents\FilterViewComponent.cs" />
+    <Compile Include="ViewComponents\HomeProductSlider2ViewComponent.cs" />
+    <Compile Include="ViewComponents\HomeProductSliderViewComponent.cs" />
+    <Compile Include="ViewComponents\HotDealViewComponent.cs" />
+    <Compile Include="ViewComponents\KhuyenMaiViewComponent.cs" />
+    <Compile Include="ViewComponents\LoaiSPViewComponent.cs" />
+    <Compile Include="ViewComponents\OrderHistoryViewComponent.cs" />
+    <Compile Include="ViewComponents\PdSliderSaleViewComponent.cs" />
+    <Compile Include="ViewComponents\ShowCommentViewComponent.cs" />
+    <Compile Include="ViewComponents\UserProfileViewComponent.cs" />
+    <Compile Include="ViewComponents\VoucherViewComponent.cs" />
     <Compile Include="ViewModel\AddressNoteBookViewModel.cs" />
     <Compile Include="ViewModel\ChiTietSanphamViewModel.cs" />
     <Compile Include="ViewModel\CommentViewModel.cs" />
@@ -195,6 +409,246 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\css\availability-calendar.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\ion.rangeSlider.css" />
+    <Content Include="Content\css\ion.rangeSlider.skinFlat.css" />
+    <Content Include="Content\css\jquerysctipttop.css" />
+    <Content Include="Content\css\linearicons.css" />
+    <Content Include="Content\css\magnific-popup.css" />
+    <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\nice-select.css" />
+    <Content Include="Content\css\nouislider.min.css" />
+    <Content Include="Content\css\owl.carousel.css" />
+    <Content Include="Content\css\site.css" />
+    <Content Include="Content\css\themify-icons.css" />
+    <Content Include="Content\css\tracking.css" />
+    <Content Include="Content\img\10\den1.jpg" />
+    <Content Include="Content\img\10\den2.jpg" />
+    <Content Include="Content\img\10\den3.jpg" />
+    <Content Include="Content\img\10\vang1.jpg" />
+    <Content Include="Content\img\10\vang2.jpg" />
+    <Content Include="Content\img\10\vang3.jpg" />
+    <Content Include="Content\img\11\den1.png" />
+    <Content Include="Content\img\11\den2.png" />
+    <Content Include="Content\img\11\den3.png" />
+    <Content Include="Content\img\11\trang1.jpg" />
+    <Content Include="Content\img\11\trang2.jpg" />
+    <Content Include="Content\img\11\trang3.jpg" />
+    <Content Include="Content\img\12\den1.jpg" />
+    <Content Include="Content\img\12\den2.jpg" />
+    <Content Include="Content\img\12\den3.jpg" />
+    <Content Include="Content\img\12\trang1.jpg" />
+    <Content Include="Content\img\12\trang2.jpg" />
+    <Content Include="Content\img\12\trang3.jpg" />
+    <Content Include="Content\img\13\den1.jpg" />
+    <Content Include="Content\img\13\den2.jpg" />
+    <Content Include="Content\img\13\den3.jpg" />
+    <Content Include="Content\img\13\trang1.jpg" />
+    <Content Include="Content\img\13\trang2.jpg" />
+    <Content Include="Content\img\13\trang3.jpg" />
+    <Content Include="Content\img\13\xanh1.jpg" />
+    <Content Include="Content\img\13\xanh2.jpg" />
+    <Content Include="Content\img\13\xanh3.jpg" />
+    <Content Include="Content\img\1\0fdde7bc-6d59-489a-9348-eba8a8299778_5ca62323-3e1e-4626-98bf-c6b6ddf512eb_TurfCopaPink.jpg" />
+    <Content Include="Content\img\1\15d2ac15-1bfb-4131-893c-67f0b4fb1998_bb014c5c-042a-409e-aca0-d44420175da7_53c22ffd-c22c-4c31-b570-c8c8ceb87523.jpg" />
+    <Content Include="Content\img\1\2a5f1129-c7c0-47e8-9d49-4dd39d993fbc_abd78516-d585-4306-91dd-85e9fb76641b_30dd4eb6-53a1-41fd-b2b9-f943db9ddf2d.jpg" />
+    <Content Include="Content\img\1\2adae7e4-940f-4c69-9277-7b760107f867_bb014c5c-042a-409e-aca0-d44420175da7_53c22ffd-c22c-4c31-b570-c8c8ceb87523.jpg" />
+    <Content Include="Content\img\1\337bbab8-a6fc-4ccb-8c68-84ede000163b_5350fcaf-45cf-44f5-8390-e57cc51e71d7_89fbe085-9047-45ff-a634-e7eafa3b1806.jpg" />
+    <Content Include="Content\img\1\48088425-aa9f-4728-a303-209962c31c5c_58615265-1ab4-44e5-ba7b-a10584b64181_TurfCopaAvatar.jpg" />
+    <Content Include="Content\img\1\53d626a5-f955-4356-ae2b-5dfae1989149_26f0da21-73be-4729-a729-b1707ad7d327_duramoabove.jpg" />
+    <Content Include="Content\img\1\569eafdc-5adf-4152-a7ac-20c3d0994686_58615265-1ab4-44e5-ba7b-a10584b64181_TurfCopaAvatar.jpg" />
+    <Content Include="Content\img\1\6309901f-6f4c-4ecf-bdc3-66076732eefa_b47930d4-b563-4990-92cc-f37898d9561a_duramo.jpg" />
+    <Content Include="Content\img\1\66ab7b9e-f586-4cdd-baf9-c2a836b12635_5ca62323-3e1e-4626-98bf-c6b6ddf512eb_TurfCopaPink.jpg" />
+    <Content Include="Content\img\1\6999ecfb-9d60-4e2a-9d75-1d1688c17594_4342b420-91be-485e-86df-80eb5d75fb9c_TurfCopaPinkAbove.jpg" />
+    <Content Include="Content\img\1\73dffc9a-c56e-469e-b75a-d160a3cbc73b_58615265-1ab4-44e5-ba7b-a10584b64181_TurfCopaAvatar.jpg" />
+    <Content Include="Content\img\1\848932b8-5585-46ba-9095-04bfb62c6d72_5ca62323-3e1e-4626-98bf-c6b6ddf512eb_TurfCopaPink.jpg" />
+    <Content Include="Content\img\1\85844507-5c23-4d48-9999-874f4cdd7c59_95c544e4-00bf-4f77-ae04-920c2a9604fb_886e73bf-7bef-4df5-9233-544b25798bd0_46d1eb79-a1d0-4cd0-b03f-b0ea0c3af149.jpg" />
+    <Content Include="Content\img\1\92b0954c-f7e4-4ad1-a35d-2ef3bb34b37d_b47930d4-b563-4990-92cc-f37898d9561a_duramo.jpg" />
+    <Content Include="Content\img\1\93bf20c3-2a25-44ac-b2e9-a66e175b929b_4342b420-91be-485e-86df-80eb5d75fb9c_TurfCopaPinkAbove.jpg" />
+    <Content Include="Content\img\1\93c7ab6c-0283-4bd3-ae7a-3d229073e5fa_93a54454-8ca9-443e-b9ff-a770448df959_c05e4d64-0078-4ec0-a7c2-4c32d6bb6274.jpg" />
+    <Content Include="Content\img\1\95c544e4-00bf-4f77-ae04-920c2a9604fb_886e73bf-7bef-4df5-9233-544b25798bd0_46d1eb79-a1d0-4cd0-b03f-b0ea0c3af149.jpg" />
+    <Content Include="Content\img\1\9c98d9f7-587f-4a30-9182-2f4542ca46a2_dc05571f-6d28-4406-95d6-bef3f11c43cd_c05e4d64-0078-4ec0-a7c2-4c32d6bb6274.jpg" />
+    <Content Include="Content\img\1\ae4828a2-39fb-467a-bcd3-8f40899424fb_5350fcaf-45cf-44f5-8390-e57cc51e71d7_89fbe085-9047-45ff-a634-e7eafa3b1806.jpg" />
+    <Content Include="Content\img\1\bbcf8798-94a6-480d-9e91-7171082cfc5a_5350fcaf-45cf-44f5-8390-e57cc51e71d7_89fbe085-9047-45ff-a634-e7eafa3b1806.jpg" />
+    <Content Include="Content\img\1\c2bdacdb-c50d-48ef-8cb9-34b5336da385_png-clipart-white-and-black-adidas-superstar-shoes-adidas-superstar-sneakers-shoe-adidas-originals-adidas-white-fashion.png" />
+    <Content Include="Content\img\1\c5359d02-87ce-4e4f-9812-5255bafc1715_10e6f69e-d52a-463e-8f3d-401493bd77c9_d64d8498-7820-4071-9072-e42549859956.jpg" />
+    <Content Include="Content\img\1\d258c2bd-2323-4d1f-a54b-c6814e9d909e_bb014c5c-042a-409e-aca0-d44420175da7_53c22ffd-c22c-4c31-b570-c8c8ceb87523.jpg" />
+    <Content Include="Content\img\1\dc05571f-6d28-4406-95d6-bef3f11c43cd_c05e4d64-0078-4ec0-a7c2-4c32d6bb6274.jpg" />
+    <Content Include="Content\img\1\dcbb36b5-b01e-43a8-95e6-0531450bd2a7_55ed857c-9e97-4ae5-a094-93b424d97b61.jpg" />
+    <Content Include="Content\img\1\e309311c-5437-4cd0-9c87-636e61e87329_2a5f1129-c7c0-47e8-9d49-4dd39d993fbc_abd78516-d585-4306-91dd-85e9fb76641b_30dd4eb6-53a1-41fd-b2b9-f943db9ddf2d.jpg" />
+    <Content Include="Content\img\1\ed6250c9-07c0-4f47-a8c8-9ad6dca21af7_ae4828a2-39fb-467a-bcd3-8f40899424fb_5350fcaf-45cf-44f5-8390-e57cc51e71d7_89fbe085-9047-45ff-a634-e7eafa3b1806.jpg" />
+    <Content Include="Content\img\1\f60a7891-1d3b-43ef-885f-749cc32ba64e_dcbb36b5-b01e-43a8-95e6-0531450bd2a7_55ed857c-9e97-4ae5-a094-93b424d97b61.jpg" />
+    <Content Include="Content\img\1\ff90a7cf-ca86-4eef-9a28-8a50b32ade32_dcbb36b5-b01e-43a8-95e6-0531450bd2a7_55ed857c-9e97-4ae5-a094-93b424d97b61.jpg" />
+    <Content Include="Content\img\2\024deca1-9c9a-4ac4-a25c-a8cc31e6371a_53c22ffd-c22c-4c31-b570-c8c8ceb87523.jpg" />
+    <Content Include="Content\img\2\06585631-cad5-48e0-b81a-8dbdd76cde1c_b47930d4-b563-4990-92cc-f37898d9561a_duramo.jpg" />
+    <Content Include="Content\img\2\0bd57093-5942-49b0-8e25-a8c08fac6222_26f0da21-73be-4729-a729-b1707ad7d327_duramoabove.jpg" />
+    <Content Include="Content\img\2\1899e2d2-8ef4-4258-a96e-8e68c617d6a4_4e8dc4f8-59d8-4dcb-b629-5d67f1a6aa02.jpg" />
+    <Content Include="Content\img\2\1afb99e3-4787-4c88-89c7-a7b4c61ef704_93a54454-8ca9-443e-b9ff-a770448df959_c05e4d64-0078-4ec0-a7c2-4c32d6bb6274.jpg" />
+    <Content Include="Content\img\2\26f0da21-73be-4729-a729-b1707ad7d327_duramoabove.jpg" />
+    <Content Include="Content\img\2\2fa571fb-779e-4165-a48b-a8e1856457cc_024deca1-9c9a-4ac4-a25c-a8cc31e6371a_53c22ffd-c22c-4c31-b570-c8c8ceb87523.jpg" />
+    <Content Include="Content\img\2\39d75dda-e7fd-45ac-9bc0-e6e0e60d6b2f_c3984f39-ddc6-47ea-8d08-8b7ada2a99fb_6888be03-d3ed-47dd-87f1-52ef3001c49a.jpg" />
+    <Content Include="Content\img\2\4f484ac4-9a7d-4f85-8a61-03e5e00892a5_93a54454-8ca9-443e-b9ff-a770448df959_c05e4d64-0078-4ec0-a7c2-4c32d6bb6274.jpg" />
+    <Content Include="Content\img\2\59cd90aa-e065-47e8-959d-d34bbe681a98_10e6f69e-d52a-463e-8f3d-401493bd77c9_d64d8498-7820-4071-9072-e42549859956.jpg" />
+    <Content Include="Content\img\2\7a7055eb-7189-4a48-9d63-390eff8f7e40_024deca1-9c9a-4ac4-a25c-a8cc31e6371a_53c22ffd-c22c-4c31-b570-c8c8ceb87523.jpg" />
+    <Content Include="Content\img\2\7d93cec2-44e4-4778-8512-c0eddb5d1060_bb014c5c-042a-409e-aca0-d44420175da7_53c22ffd-c22c-4c31-b570-c8c8ceb87523.jpg" />
+    <Content Include="Content\img\2\892cff65-f772-423f-9d9f-cfbe46192c40_26f0da21-73be-4729-a729-b1707ad7d327_duramoabove.jpg" />
+    <Content Include="Content\img\2\8ff58404-da87-46c2-aa87-2935ee7de5e9_duramobottom.jpg" />
+    <Content Include="Content\img\2\93a54454-8ca9-443e-b9ff-a770448df959_c05e4d64-0078-4ec0-a7c2-4c32d6bb6274.jpg" />
+    <Content Include="Content\img\2\9521c86b-eb59-4508-9c86-ace121e63327_b47930d4-b563-4990-92cc-f37898d9561a_duramo.jpg" />
+    <Content Include="Content\img\2\a81f25e2-3755-414d-90d5-1636d33ca774_26f0da21-73be-4729-a729-b1707ad7d327_duramoabove.jpg" />
+    <Content Include="Content\img\2\b47930d4-b563-4990-92cc-f37898d9561a_duramo.jpg" />
+    <Content Include="Content\img\2\b4b26739-b684-42e1-b3af-84d1cd67b80a_b47930d4-b563-4990-92cc-f37898d9561a_duramo.jpg" />
+    <Content Include="Content\img\2\b53168b0-8bc8-4ed3-9270-ff28c54e32eb_10e6f69e-d52a-463e-8f3d-401493bd77c9_d64d8498-7820-4071-9072-e42549859956.jpg" />
+    <Content Include="Content\img\2\bb014c5c-042a-409e-aca0-d44420175da7_53c22ffd-c22c-4c31-b570-c8c8ceb87523.jpg" />
+    <Content Include="Content\img\2\c3984f39-ddc6-47ea-8d08-8b7ada2a99fb_6888be03-d3ed-47dd-87f1-52ef3001c49a.jpg" />
+    <Content Include="Content\img\2\c727898e-5ef5-43cf-97f2-a5f8f91be326_024deca1-9c9a-4ac4-a25c-a8cc31e6371a_53c22ffd-c22c-4c31-b570-c8c8ceb87523.jpg" />
+    <Content Include="Content\img\2\dbf81063-eb42-4f6e-964f-1495c493a834_bb014c5c-042a-409e-aca0-d44420175da7_53c22ffd-c22c-4c31-b570-c8c8ceb87523.jpg" />
+    <Content Include="Content\img\2\f058807a-5f70-45ff-a618-cfabc23ff587_024deca1-9c9a-4ac4-a25c-a8cc31e6371a_53c22ffd-c22c-4c31-b570-c8c8ceb87523.jpg" />
+    <Content Include="Content\img\3\1af203ae-9e72-405e-ad1f-b687ff2af69e_1e1807d5-fb18-4781-84ef-ebbc24d38283.jpg" />
+    <Content Include="Content\img\3\4342b420-91be-485e-86df-80eb5d75fb9c_TurfCopaPinkAbove.jpg" />
+    <Content Include="Content\img\3\58615265-1ab4-44e5-ba7b-a10584b64181_TurfCopaAvatar.jpg" />
+    <Content Include="Content\img\3\5ca62323-3e1e-4626-98bf-c6b6ddf512eb_TurfCopaPink.jpg" />
+    <Content Include="Content\img\3\6969f9e7-81c6-48d2-95d5-09d5c4d01bb6_72101b7d-147c-4dde-a360-6c359a19035a.jpg" />
+    <Content Include="Content\img\3\6b35a36e-9ae3-4b8a-b075-b1deced97c4e_4342b420-91be-485e-86df-80eb5d75fb9c_TurfCopaPinkAbove.jpg" />
+    <Content Include="Content\img\3\96215044-f18c-4e64-9792-0de192cd53c5_5ca62323-3e1e-4626-98bf-c6b6ddf512eb_TurfCopaPink.jpg" />
+    <Content Include="Content\img\3\f7799cf8-a76c-4583-b0eb-16baca96fcc8_58615265-1ab4-44e5-ba7b-a10584b64181_TurfCopaAvatar.jpg" />
+    <Content Include="Content\img\3\fbcf3a14-68a4-4848-be1e-200ce441b364_395c2873-94e7-4e4c-a963-083f96959d8b.jpg" />
+    <Content Include="Content\img\4\276dfd20-44fd-4da6-99ff-57c6a986486f_68ee269e-f3e8-448b-b2b1-09a35351b5fa.jpg" />
+    <Content Include="Content\img\4\404e82da-a83a-48af-88a0-22e1a9e97fe8.jpg" />
+    <Content Include="Content\img\4\44e832d7-cb93-48d3-ba31-e5ba0a90b2c6_b47930d4-b563-4990-92cc-f37898d9561a_duramo.jpg" />
+    <Content Include="Content\img\4\5168301f-b119-4d61-a5b3-aee3edd19425.jpg" />
+    <Content Include="Content\img\4\5a10e299-cf48-467b-a70f-6daf8cfe42a7_024deca1-9c9a-4ac4-a25c-a8cc31e6371a_53c22ffd-c22c-4c31-b570-c8c8ceb87523.jpg" />
+    <Content Include="Content\img\4\5ab4f94a-0f4c-4f60-b4a9-88032c68198d_8c95e9dc-9336-4db2-a30c-717e49b95a81.jpg" />
+    <Content Include="Content\img\4\658ee8fa-522a-49dc-ba8e-21efb2ff3516_98384c1f-cd28-4884-b070-e7b7d8058ef4.jpg" />
+    <Content Include="Content\img\4\68ee269e-f3e8-448b-b2b1-09a35351b5fa.jpg" />
+    <Content Include="Content\img\4\6ce353e4-d1c9-49fd-a384-47e720375d88_88eed805-a5e4-46d4-977d-9a5dee60ec81.jpg" />
+    <Content Include="Content\img\4\7904c098-3504-43fe-bccf-56fab0acaaec_bb014c5c-042a-409e-aca0-d44420175da7_53c22ffd-c22c-4c31-b570-c8c8ceb87523.jpg" />
+    <Content Include="Content\img\4\88eed805-a5e4-46d4-977d-9a5dee60ec81.jpg" />
+    <Content Include="Content\img\4\8a5623d4-05b2-4872-8e2d-cefbf4ad3b00_404e82da-a83a-48af-88a0-22e1a9e97fe8.jpg" />
+    <Content Include="Content\img\4\8c95e9dc-9336-4db2-a30c-717e49b95a81.jpg" />
+    <Content Include="Content\img\4\98384c1f-cd28-4884-b070-e7b7d8058ef4.jpg" />
+    <Content Include="Content\img\4\ff98759e-5ff1-446c-bf83-0cddc01cf9a2_5168301f-b119-4d61-a5b3-aee3edd19425.jpg" />
+    <Content Include="Content\img\6\29ba107f-472a-44de-b981-7641a816e12b_024deca1-9c9a-4ac4-a25c-a8cc31e6371a_53c22ffd-c22c-4c31-b570-c8c8ceb87523.jpg" />
+    <Content Include="Content\img\6\2ceec25c-2e90-4d75-af93-800585bd3b58_26f0da21-73be-4729-a729-b1707ad7d327_duramoabove.jpg" />
+    <Content Include="Content\img\6\33b179e2-e62d-4936-9057-abd3d22b5bd4_93a54454-8ca9-443e-b9ff-a770448df959_c05e4d64-0078-4ec0-a7c2-4c32d6bb6274.jpg" />
+    <Content Include="Content\img\6\4d52b28d-e493-412a-aee1-b9d1b0e3de8f_93a54454-8ca9-443e-b9ff-a770448df959_c05e4d64-0078-4ec0-a7c2-4c32d6bb6274.jpg" />
+    <Content Include="Content\img\6\4e54a7a2-4ade-4de2-a9e3-65a90ebb4e8f_024deca1-9c9a-4ac4-a25c-a8cc31e6371a_53c22ffd-c22c-4c31-b570-c8c8ceb87523.jpg" />
+    <Content Include="Content\img\6\5fd3e8a0-a950-4d3d-abcc-7ec57243b948_b47930d4-b563-4990-92cc-f37898d9561a_duramo.jpg" />
+    <Content Include="Content\img\6\64624b4c-b8ee-4835-9936-a727bfca466b_10e6f69e-d52a-463e-8f3d-401493bd77c9_d64d8498-7820-4071-9072-e42549859956.jpg" />
+    <Content Include="Content\img\6\65d4ad1e-3b28-47f1-a51a-a0f51b4843b9_10e6f69e-d52a-463e-8f3d-401493bd77c9_d64d8498-7820-4071-9072-e42549859956.jpg" />
+    <Content Include="Content\img\6\6e667d27-6294-40da-ac77-57ad2913c10d_024deca1-9c9a-4ac4-a25c-a8cc31e6371a_53c22ffd-c22c-4c31-b570-c8c8ceb87523.jpg" />
+    <Content Include="Content\img\6\79f9e9e3-bfd9-4b19-a237-ca825f9d0aee_bb014c5c-042a-409e-aca0-d44420175da7_53c22ffd-c22c-4c31-b570-c8c8ceb87523.jpg" />
+    <Content Include="Content\img\6\aaa72e22-ed42-4a65-913c-aeb64f6fd84c_bb014c5c-042a-409e-aca0-d44420175da7_53c22ffd-c22c-4c31-b570-c8c8ceb87523.jpg" />
+    <Content Include="Content\img\6\b29c3849-8ce2-4b51-a5b7-866eac441df1_26f0da21-73be-4729-a729-b1707ad7d327_duramoabove.jpg" />
+    <Content Include="Content\img\6\b877499b-9587-4e94-8329-4fd0ed109c5f_bb014c5c-042a-409e-aca0-d44420175da7_53c22ffd-c22c-4c31-b570-c8c8ceb87523.jpg" />
+    <Content Include="Content\img\6\c6ab0932-6786-422d-9d95-34ab4e512895_bb014c5c-042a-409e-aca0-d44420175da7_53c22ffd-c22c-4c31-b570-c8c8ceb87523.jpg" />
+    <Content Include="Content\img\6\d41df4a8-0e5b-43bb-b9d9-b794a28ac79e_26f0da21-73be-4729-a729-b1707ad7d327_duramoabove.jpg" />
+    <Content Include="Content\img\7\do1.jpg" />
+    <Content Include="Content\img\7\do2.jpg" />
+    <Content Include="Content\img\7\do3.jpg" />
+    <Content Include="Content\img\7\trang1.jpg" />
+    <Content Include="Content\img\7\trang2.jpg" />
+    <Content Include="Content\img\7\trang3.jpg" />
+    <Content Include="Content\img\dk.png" />
+    <Content Include="Content\img\8\do1.jpg" />
+    <Content Include="Content\img\8\do2.jpg" />
+    <Content Include="Content\img\8\do3.jpg" />
+    <Content Include="Content\img\8\trang1.jpg" />
+    <Content Include="Content\img\8\trang2.jpg" />
+    <Content Include="Content\img\8\trang3.jpg" />
+    <Content Include="Content\img\9\den1.jpg" />
+    <Content Include="Content\img\9\den2.jpg" />
+    <Content Include="Content\img\9\den3.jpg" />
+    <Content Include="Content\img\9\do1.jpg" />
+    <Content Include="Content\img\9\do2.jpg" />
+    <Content Include="Content\img\9\do3.jpg" />
+    <Content Include="Content\img\9\xanh1.jpg" />
+    <Content Include="Content\img\9\xanh2.jpg" />
+    <Content Include="Content\img\9\xanh3.jpg" />
+    <Content Include="Content\img\banner\8bc09f62845d57fd8951e7bed4714b59-removebg-preview %282%29.png" />
+    <Content Include="Content\img\banner\e2116ce0-0a18-4833-b6dd-6c251e67ce92_banner-img.png" />
+    <Content Include="Content\img\banner\ec8fe1bc-19c3-49ac-9b89-64bff87e5f2f_football-shoes-amazon-scaled-692x376.jpg" />
+    <Content Include="Content\img\banner\next.png" />
+    <Content Include="Content\img\banner\pexels-photo-1598505-removebg-preview %281%29.png" />
+    <Content Include="Content\img\banner\prev.png" />
+    <Content Include="Content\img\brand\1.png" />
+    <Content Include="Content\img\brand\2.png" />
+    <Content Include="Content\img\brand\3.png" />
+    <Content Include="Content\img\brand\4.png" />
+    <Content Include="Content\img\brand\5.png" />
+    <Content Include="Content\img\brand\fav.png" />
+    <Content Include="Content\img\category\c1.jpg" />
+    <Content Include="Content\img\category\c2.jpg" />
+    <Content Include="Content\img\category\c3.jpg" />
+    <Content Include="Content\img\category\c4.jpg" />
+    <Content Include="Content\img\category\c5.jpg" />
+    <Content Include="Content\img\category\s-p1.jpg" />
+    <Content Include="Content\img\features\f-icon1.png" />
+    <Content Include="Content\img\features\f-icon2.png" />
+    <Content Include="Content\img\features\f-icon3.png" />
+    <Content Include="Content\img\features\f-icon4.png" />
+    <Content Include="Content\img\product\next.png" />
+    <Content Include="Content\img\product\prev.png" />
+    <Content Include="Content\img\sd\c1.jpg" />
+    <Content Include="Content\img\sd\c2.jpg" />
+    <Content Include="Content\img\sd\c3.jpg" />
+    <Content Include="Content\img\sd\c4.jpg" />
+    <Content Include="Content\img\sd\c5.jpg" />
+    <Content Include="Content\img\size\sizes.jpg" />
+    <Content Include="Content\img\videos\06ade6a0-edab-4ca8-bbc4-d1e79f399491_Giay_Response_CL_trang_IG6226_video.webm" />
+    <Content Include="Content\img\videos\13\6f439187-daf9-4c42-92c8-cfc90669f6b5_Response_CL_Shoes_White_IG6226_video.webm" />
+    <Content Include="Content\img\videos\13\935d1cd0-5588-4865-83f0-1bc75de4c062_Response_CL_Shoes_Blue_IG6227_video.webm" />
+    <Content Include="Content\img\videos\9\den.webm" />
+    <Content Include="Content\img\videos\9\do.webm" />
+    <Content Include="Content\img\videos\9\xanh.webm" />
+    <Content Include="Content\js\countdown.js" />
+    <Content Include="Content\js\gmaps.min.js" />
+    <Content Include="Content\js\ion.rangeSlider.js" />
+    <Content Include="Content\js\jquery.ajaxchimp.min.js" />
+    <Content Include="Content\js\jquery.magnific-popup.min.js" />
+    <Content Include="Content\js\jquery.nice-select.min.js" />
+    <Content Include="Content\js\jquery.sticky.js" />
+    <Content Include="Content\js\main.js" />
+    <Content Include="Content\js\nouislider.min.js" />
+    <Content Include="Content\js\owl.carousel.min.js" />
+    <Content Include="Content\js\parallax.min.js" />
+    <Content Include="Content\js\vendor\bootstrap.min.js" />
+    <Content Include="Content\js\vendor\jquery-2.2.4.min.js" />
+    <Content Include="Content\js\vendor\popper.js" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-grid.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-grid.min.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-grid.rtl.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-reboot.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-utilities.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-utilities.min.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap.rtl.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap.rtl.min.css" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.bundle.js" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.esm.js" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.esm.min.js" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="Content\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <Content Include="Content\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\lib\jquery-validation-unobtrusive\LICENSE.txt" />
+    <Content Include="Content\lib\jquery-validation\dist\additional-methods.js" />
+    <Content Include="Content\lib\jquery-validation\dist\additional-methods.min.js" />
+    <Content Include="Content\lib\jquery-validation\dist\jquery.validate.js" />
+    <Content Include="Content\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <Content Include="Content\lib\jquery\dist\jquery.js" />
+    <Content Include="Content\lib\jquery\dist\jquery.min.js" />
+    <Content Include="Content\lib\jquery\LICENSE.txt" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -205,6 +659,34 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\css\bootstrap.map" />
+    <Content Include="Content\css\main.css.map" />
+    <Content Include="Content\css\main.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-utilities.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap.rtl.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.bundle.js.map" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.esm.js.map" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.esm.min.js.map" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.js.map" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.min.js.map" />
+    <Content Include="Content\lib\bootstrap\LICENSE" />
+    <Content Include="Content\lib\jquery-validation\LICENSE.md" />
+    <Content Include="Content\lib\jquery\dist\jquery.min.map" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -230,11 +712,27 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutPage.cshtml" />
+    <Content Include="Views\Shared\_LeftMenu.cshtml" />
+    <Content Include="Views\Shared\_OrderStatus.cshtml" />
+    <Content Include="Views\Shared\_PartialSanPhamTheoLoai.cshtml" />
+    <Content Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\AddressBookPartialView.cshtml" />
+    <Content Include="Views\Shared\UpdateAddressPartial.cshtml" />
+    <Content Include="Views\Account\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Migration\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Default\" />
+    <Folder Include="Views\FavouriteProducts\" />
+    <Folder Include="Views\KhuyenMai\" />
+    <Folder Include="Views\PhieuMua\" />
+    <Folder Include="Views\SanPham\" />
+    <Folder Include="Views\ShoppingCart\" />
+    <Folder Include="Views\TrackingOrder\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -262,6 +760,11 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202508081033336_setDbSet.resx">
+      <DependentUpon>202508081033336_setDbSet.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

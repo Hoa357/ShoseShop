@@ -11,8 +11,8 @@ namespace ShoseShop.Data
         public string MaVoucher { get; set; } // Mã voucher
         public int SoLuong { get; set; } // Tên voucher
 
-        public Double GiaToiThieu { get; set; } // Giá trị tối thiểu để áp dụng voucher
-        public Double GiaToiDa { get; set; } // Giá trị giảm giá của voucher
+        public decimal GiaToiThieu { get; set; } // Giá trị tối thiểu để áp dụng voucher
+        public decimal GiaToiDa { get; set; } // Giá trị giảm giá của voucher
         
         public DateTime NgayBatDau { get; set; } // Ngày bắt đầu áp dụng voucher
         public DateTime NgayKetThuc { get; set; } // Ngày kết thúc áp dụng voucher

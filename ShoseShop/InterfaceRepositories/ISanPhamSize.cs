@@ -1,4 +1,5 @@
 ﻿using ShoseShop.Data;
+using ShoseShop.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ShoseShop.InterfaceRepositories
 {
-    internal interface ISanPhamSize
+    public interface ISanPhamSize
     {
 
         SanPhamSize GetSLTon(int masp, int masize);

@@ -35,6 +35,8 @@ namespace ShoseShop.Data
         public virtual DbSet<NhanVien> Nhanviens { get; set; }
 
         public virtual DbSet<PhieuMua> Phieumuas { get; set; }
+        public virtual DbSet<Banner> Banner { get; set; }
+
 
         public virtual DbSet<Phuong> Phuongs { get; set; }
 
@@ -160,7 +162,7 @@ namespace ShoseShop.Data
             khachangConfig.Property(e => e.NgaySinh)
                     .HasColumnType("datetime")
                     .HasColumnName("NGAYSINH");
-            khachangConfig.Property(e => e.SoĐT)
+            khachangConfig.Property(e => e.Phone)
                     .HasMaxLength(255)
                     .HasColumnName("SDT");
             khachangConfig.Property(e => e.TenKhachHang)
@@ -263,7 +265,7 @@ namespace ShoseShop.Data
                     .HasColumnName("DIACHI");
             nhanvienConfig.Property(e => e.Email)
                     .HasMaxLength(255)
-                    .HasColumnName("EMAIL");
+                    .HasColumnName("EMAILL");
             nhanvienConfig.Property(e => e.GioiTinh).HasColumnName("GIOITINH");
             nhanvienConfig.Property(e => e.NgaySinh)
                     .HasColumnType("datetime")
@@ -276,10 +278,7 @@ namespace ShoseShop.Data
                     .HasColumnName("TENNV");
 
 
-            // Thiết lập quan hệ 1-1 từ Nhanvien → TaiKhoan
-            nhanvienConfig.HasRequired(nv => nv.EmailNavigation)
-                .WithOptional(tk => tk.NhanViens)
-                .Map(m => m.MapKey("EMAIL"));
+          
 
 
             
@@ -501,6 +500,10 @@ namespace ShoseShop.Data
                     .HasMaxLength(255)
                     .HasColumnName("MATKHAU");
 
+            // Thiết lập quan hệ 1-1 từ TaiKhoan → NhanVien
+            TaiKhoanconfiguration.HasRequired(e => e.NhanViens)
+                .WithOptional(tk => tk.EmailNavigation);
+               
 
             var Tinhconfiguration = modelBuilder.Entity<Tinh>();
 
@@ -540,7 +543,23 @@ namespace ShoseShop.Data
                     .HasColumnName("NGAYTAO");
             Voucherconfiguration.Property(e => e.SoLuong).HasColumnName("SOLUONG");
 
+            var Bannerconfiguration = modelBuilder.Entity<Banner>();
 
+            Bannerconfiguration.HasKey(e => e.Mabanner);
+
+            Bannerconfiguration.ToTable("Banner");
+
+            Bannerconfiguration.Property(e => e.Mabanner).HasColumnName("MABANNER");
+            Bannerconfiguration.Property(e => e.Hoatdong).HasColumnName("HOATDONG");
+            Bannerconfiguration.Property(e => e.Link).HasColumnName("LINK");
+            Bannerconfiguration.Property(e => e.Slogan)
+                    .HasMaxLength(255)
+                    .HasColumnName("SLOGAN");
+            Bannerconfiguration.Property(e => e.Tenbanner)
+                    .HasMaxLength(255)
+                    .HasColumnName("TENBANNER");
+            Bannerconfiguration.Property(e => e.Vitri).HasColumnName("VITRI");
+           
 
         }
 

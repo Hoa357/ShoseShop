@@ -11,7 +11,7 @@ namespace ShoseShop.Data
         public string TenSanPham { get; set; }
         public int Maloai { get; set; }
 
-        public double GiaSanPham { get; set; } // Giá sản phẩm
+        public decimal GiaSanPham { get; set; } // Giá sản phẩm
         public string MoTa { get; set; } // Mô tả sản phẩm
 
 

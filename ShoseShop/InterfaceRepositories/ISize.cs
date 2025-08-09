@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShoseShop.InterfaceRepositories
 {
-    internal interface ISize
+    public interface ISize
     {
       
         Size GetSize(int masize);

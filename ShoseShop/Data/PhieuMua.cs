@@ -35,7 +35,7 @@ namespace ShoseShop.Data
 
         public string LyDoHuyDon { get; set; } // Lý do hủy đơn hàng (nếu có, có thể null nếu không hủy)
 
-        public double TongTien { get; set; } // Tổng tiền của phiếu mua hàng
+        public decimal TongTien { get; set; } // Tổng tiền của phiếu mua hàng
         
         public DateTime? NgayHuyDon { get; set; } // Ngày hủy đơn hàng (nếu có, có thể null nếu không hủy)
 

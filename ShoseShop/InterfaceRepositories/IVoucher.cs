@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShoseShop.InterfaceRepositories
 {
-    internal interface IVoucher
+    public interface IVoucher
     {
         List<Voucher> getAllVoucherToday();
         Voucher GetVoucherByCode(string id);

@@ -9,6 +9,7 @@ namespace ShoseShop.Data
 {
     public class NhanVien
     {
+        [Key]
        public int MaNV { get; set; } // Mã nhân viên
 
         public virtual PhieuMua MaPMNavigation { get; set; } // Size liên kết với sản phẩm
