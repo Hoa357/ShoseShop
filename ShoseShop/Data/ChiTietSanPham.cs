@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,7 @@ namespace ShoseShop.Data
 {
     public class ChiTietSanPham
     {
+ 
         public int MaChiTietSP { get; set; } // Mã chi tiết sản phẩm
 
         public int MaSP { get; set; } // Mã sản phẩm liên kết với chi tiết sản phẩm

@@ -1,0 +1,333 @@
+﻿@using ShoseShop.ViewModel
+@model PhieuMuaViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml"; // Đảm bảo layout được đặt ở đây
+    ViewBag.Title = "Thanh toán";
+    decimal tongtien = 0;
+}
+<style>
+    /* CSS của bạn giữ nguyên, không cần thay đổi */
+    .iconPurchase {
+        font-size: 35px;
+    }
+
+    .checkform_box {
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        padding: 15px;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+        .checkform_box:hover {
+            border-color: #007bff;
+        }
+
+    .checkOn {
+        border-color: #007bff;
+    }
+
+        .checkOn .form-check-input:checked + .form-check-label {
+            border-color: #007bff;
+            color: #231F20;
+        }
+
+    .imgProduct {
+        max-height: 60px;
+        max-width: 60px;
+    }
+
+    .addressBlock {
+        width: 550px;
+        height: 75px;
+        border-radius: 3px;
+        border: solid 1px #ccc;
+        background-color: #FFFFFF;
+        padding: 10px;
+        margin-bottom: 10px;
+        position: relative;
+    }
+
+        .addressBlock:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .addressBlock .btn-choose {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+    .voucher-slider-container {
+        overflow: hidden;
+    }
+
+    .voucher-slider {
+        display: flex;
+    }
+
+    .voucher-details {
+        flex: 0 0 auto;
+        margin-right: 20px;
+        transition: transform 0.5s ease;
+    }
+
+    .coinWelcome {
+        background-color: #F1F1F1;
+        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 15px;
+    }
+</style>
+
+
+@section Scripts {
+    <script>
+        function passMaptttOnClick(mapttt) {
+            var allRadioDivs = document.querySelectorAll('.checkform_box');
+            allRadioDivs.forEach(function (div) { div.classList.remove('checkOn'); });
+            var radio = document.getElementById('check_' + mapttt);
+            if (radio) {
+                radio.checked = true;
+                radio.closest('.checkform_box').classList.add('checkOn');
+            }
+            document.getElementById('Mapttt').value = mapttt;
+        }
+
+        function handlePayment() {
+            var selectedPaymentMethod = document.getElementById("Mapttt").value;
+            if (!selectedPaymentMethod) {
+                alert("Vui lòng chọn một phương thức thanh toán.");
+                return;
+            }
+
+            if (selectedPaymentMethod == "2") { // VNPay
+                $.ajax({
+                    url: '@Url.Action("CreatePaymentUrlVnpay", "PhieuMua")',
+                    type: 'POST',
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.href = response.paymentUrl;
+                        } else {
+                            alert("Lỗi: " + response.message);
+                        }
+                    },
+                    error: function () {
+                        alert("Đã xảy ra lỗi khi tạo yêu cầu thanh toán. Vui lòng thử lại.");
+                    }
+                });
+            } else {
+                document.getElementById("formThanhToan").submit();
+            }
+        }
+
+        $(document).ready(function () {
+            // Sử dụng event delegation để gắn sự kiện, tốt hơn cho các element được tạo động
+            $(document).on('click', '.changeAddress', function (e) {
+                e.preventDefault();
+                var masodiachiView = $(this).attr('value');
+                $.ajax({
+                    url: '@Url.Action("ChangeAddressPhieuMua", "PhieuMua")',
+                    type: 'GET',
+                    data: { masodiachi: masodiachiView },
+                    success: function (response) {
+                        if (response.success === false) { return; }
+                        $('#khInfo_HoTenNhan').val(response.hoTen);
+                        $('#khInfo_SoDTNhan').val(response.sdt);
+                        $('#khInfo_DiaChiNhan').val(response.diachi);
+                        $('#khInfo_MaTinh').val(response.maTinh).trigger('change'); // Trigger change để load quận/huyện
+
+                        // Cần một khoảng chờ nhỏ để API tỉnh/huyện load xong
+                        setTimeout(function() {
+                            var selectQuan = $('#khInfo_MaQuan');
+                            selectQuan.empty().append('<option value="">Chọn quận/huyện</option>');
+                            $.each(response.selectQuan, function (i, item) { selectQuan.append($('<option>', { value: item.value, text: item.text })); });
+                            selectQuan.val(response.maQuan).trigger('change');
+
+                            setTimeout(function() {
+                                var selectWard = $('#khInfo_MaPhuong');
+                                selectWard.empty().append('<option value="">Chọn phường/xã</option>');
+                                $.each(response.selectPhuong, function (i, item) { selectWard.append($('<option>', { value: item.value, text: item.text })); });
+                                selectWard.val(response.maPhuong);
+                            }, 500); // Chờ load phường/xã
+                        }, 500); // Chờ load quận/huyện
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Thanh toán</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="@Url.Action("Index", "Home")">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+                    <a>Thanh toán</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="checkout_area section_gap">
+    <div class="container">
+        <div class="billing_details">
+            <div class="row">
+                @using (Html.BeginForm("ThanhToan", "PhieuMua", FormMethod.Post, new { id = "formThanhToan", @class = "row contact_form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    if (Model.khInfo != null)
+                    {
+                        @Html.HiddenFor(m => m.khInfo.MaKhachHang)
+                        @Html.HiddenFor(m => m.khInfo.NgaySinh)
+                    }
+
+                    <div class="col-lg-7">
+                        <div class="coinWelcome">
+                            @if (Model.khInfo != null)
+                            {
+                                <h1>Xin chào, @Model.khInfo.TenKhachHang</h1>
+                            }
+                            else
+                            {
+                                <h1>@Html.ActionLink("Đăng nhập", "Login", "Account", new { backToPage = "thanhtoan" }, new { style = "text-decoration:underline" })</h1>
+                            }
+                            <h3 style="border: none; margin: 0; font-size: 16px;">
+                                Đơn hàng của bạn có @(Model.listcartItem?.Count ?? 0) sản phẩm
+                            </h3>
+                            <strong style="color:#2F5ACF" id="strongFirstPrice"><span>Tổng tiền là: </span> @Model.totalCost.ToString("#,##0")₫</strong>
+                        </div>
+                        <div class="row" style="border-bottom:solid 1px #ccc;display:flex;align-items-center">
+                            <div class="col-6"><h3>Thông tin vận chuyển</h3></div>
+                            @if (Model.khInfo != null)
+                            {
+                                <div class="col-6">
+                                    <a data-toggle="modal" data-target="#addressModal" style="cursor:pointer;" class="float-right">
+                                        <i class="bi bi-journal-bookmark-fill"></i>
+                                        <span style="text-decoration:underline;color:orange">Chọn từ sổ địa chỉ</span>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+
+                        <!-- Sổ địa chỉ Modal -->
+                        <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="addressModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document" style="max-width:600px">
+                                <div class="modal-content">
+                                    <div class="modal-header text-center"><h5 class="modal-title" id="addressModalLabel">Sổ địa chỉ</h5><button type="button" class="close" data-dismiss="modal" aria-label="Đóng"><span aria-hidden="true">&times;</span></button></div>
+                                    <div class="modal-body">
+                                        @if (Model.SoDiaChis != null && Model.SoDiaChis.Any())
+                                        {
+                                            foreach (var address in Model.SoDiaChis)
+                                            {
+                                                <div class="addressBlock">
+                                                    <p style="font-size:14px;font-weight:bold;color:#222222;margin-bottom:6px">@address.TenNguoiNhan - @address.SoDTNguoiNhan</p>
+                                                    <p style="font-size:14px;font-weight:500;color:#222222">@address.DiaChi</p>
+                                                    <a href="#" class="btn btn-info btn-choose changeAddress" style="color:white" value="@address.MaSoDiaChi" data-dismiss="modal">Chọn</a>
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <p>Bạn chưa có địa chỉ nào được lưu.</p>
+                                        }
+                                    </div>
+                                    <div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button></div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row contact_form" novalidate="novalidate">
+                            @{ Html.RenderPartial("_PartialViewOrderDetail", Model); }
+                            <div class="col-md-12 form-group p_star">
+                                @Html.LabelFor(m => m.GhiChu, new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.GhiChu, new { @class = "form-control", placeholder = "Ghi chú" })
+                                @Html.ValidationMessageFor(m => m.GhiChu, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row mb-3" style="border-bottom:solid 1px #ccc;display:flex;align-items:center">
+                            <div class="col-6"><h2>Phương thức thanh toán</h2></div>
+                        </div>
+
+                        @Html.HiddenFor(m => m.Mapttt)
+                        @if (ViewBag.MethodPurchase != null)
+                        {
+                            foreach (ShoseShop.Data.PhuongThucThanhToan pttt in ViewBag.MethodPurchase)
+                            {
+                                <div class="checkform_box mb-3" id="div_@pttt.MaPTTT" onclick="passMaptttOnClick('@pttt.MaPTTT')">
+                                    <div class="form-check d-flex align-items-center">
+                                        @Html.RadioButtonFor(m => m.Mapttt, pttt.MaPTTT, new { id = "check_" + pttt.MaPTTT, @class = "form-check-input" })
+                                        <label class="form-check-label d-flex align-items-center" for="check_@pttt.MaPTTT">
+                                            <span class="mr-2 ml-2">
+                                                @if (pttt.MaPTTT == 2)
+                                                {<i class="fa fa-credit-card iconPurchase"></i>}
+                                                else
+                                                {<i class="bi bi-truck iconPurchase"></i>}
+                                            </span>
+                                            @pttt.TenPTTT
+                                        </label>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        @Html.ValidationMessageFor(m => m.Mapttt, "", new { @class = "text-danger" })
+
+                        <button class="primary-btn text-center" type="button" onclick="handlePayment()" style="width:100%">Xác nhận thanh toán</button>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="order_box">
+                            <h2>Đơn hàng của bạn</h2>
+                            <ul class="list">
+                                <li><a href="#">Sản phẩm<span>Tổng chi phí</span></a></li>
+                                @if (Model.listcartItem != null)
+                                {
+                                    foreach (ShoppingCartItem shopcartItem in Model.listcartItem)
+                                    {
+                                        <li class="d-flex align-items-center mb-1">
+                                            <div class="img-container" style="margin-right:10px">
+                                                <img class="imgProduct" src="@Url.Content("~/Content/img/" + (shopcartItem.sanphamct?.MaSP) + "/" + (shopcartItem.sanphamct?.AnhDaiDien ?? "placeholder.png"))" alt="@shopcartItem.Name">
+                                            </div>
+                                            <div class="product-details" style="flex:1">
+                                                <span>@shopcartItem.Name</span>
+                                                <div>Màu: @shopcartItem.TenMau</div>
+                                                <div>Size: @shopcartItem.Size <span class="middle">Số lượng: @shopcartItem.Quantity</span></div>
+                                            </div>
+                                            <div class="quantity-price ml-auto">
+                                                @{
+                                                    decimal tiensp = 0;
+                                                    if (shopcartItem != null)
+                                                    {
+                                                        if (shopcartItem.PhanTramGiam != 1)
+                                                        {
+                                                            tiensp = shopcartItem.Quantity * (shopcartItem.GiaGoc - (shopcartItem.GiaGoc * shopcartItem.PhanTramGiam / 100));
+                                                        }
+                                                        else
+                                                        {
+                                                            tiensp = shopcartItem.Quantity * shopcartItem.GiaGoc;
+                                                        }
+                                                        tongtien += tiensp;
+                                                    }
+                                                }
+                                                <span class="last">@(tiensp.ToString("#,##0"))₫</span>
+                                            </div>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                            @{ Html.RenderPartial("_PartialViewPriceDetail", Model); }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

@@ -20,7 +20,7 @@ namespace ShoseShop.Data
         public virtual ICollection<KhuyenMai> KhuyenMais { get; set; } = new List<KhuyenMai>();
 
         public virtual ICollection<ChiTietKhuyenMai> ChiTietKhuyenMais { get; set; } = new List<ChiTietKhuyenMai>();
-        public virtual ICollection<BinhLuan> Binhluans { get; set; } = new List<BinhLuan>();
+        public virtual ICollection<BinhLuan> BinhLuans { get; set; } = new List<BinhLuan>();
 
         public virtual ICollection<ChiTietSanPham> ChiTietSanPhams { get; set; } = new List<ChiTietSanPham>();
 

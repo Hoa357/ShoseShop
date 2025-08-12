@@ -11,7 +11,7 @@ namespace ShoseShop.InterfaceRepositories
     public interface ISanPham
     {
         SanPham GetSanpham(int masp);
-        List<SanphamViewModel> GetSanPhamView(string maMau, int? sortGia, string searchString, decimal? minPrice, decimal? maxPrice, int maLoai);
+        List<SanphamViewModel> GetSanPhamView(int maMau, int? sortGia, string searchString, decimal? minPrice, decimal? maxPrice, int maLoai);
     
 }
 }

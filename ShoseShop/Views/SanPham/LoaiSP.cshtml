@@ -1,0 +1,18 @@
+﻿@model IEnumerable<ShoseShop.Data.Loai>
+
+<li class="nav-item submenu dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+       aria-expanded="false">Mua sắm</a>
+    <ul class="dropdown-menu">
+        <li class="nav-item">
+            @Html.ActionLink("Tất cả", "SanPhamTheoLoai", "SanPham", new { maLoai = -1 }, new { @class = "nav-link" })
+        </li>
+
+        @foreach (var l in Model)
+        {
+            <li class="nav-item">
+                @Html.ActionLink(l.TenLoai, "SanPhamTheoLoai", "SanPham", new { maLoai = l.MaLoai }, new { @class = "nav-link" })
+            </li>
+        }
+    </ul>
+</li>

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ShoseShop.ViewModel
 {
-    public class SodiachiProfileViewModel
+    public class SoDiaChiProfileViewModel
     {
         public List<SoDiaChi> sdc { get; set; }
         public string currentKhName { get; set; }

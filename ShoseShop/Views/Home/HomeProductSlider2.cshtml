@@ -1,0 +1,195 @@
+﻿@using ShoseShop.ViewModel
+@model List<SanPhamHomeViewModel>
+
+<style>
+
+    .product-card_2 {
+        position: relative;
+        flex: 0 0 auto;
+        width: 250px;
+        height: 370px;
+        margin-right: 20px;
+    }
+
+    .product-image_2 {
+        width: 100%;
+        height: 250px;
+        overflow: hidden;
+        position: relative;
+    }
+
+        .product-image_2 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .text-top-right {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: #fdd464;
+    }
+
+    .view-details-btn {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        width: 100%;
+        transform: translateX(-50%);
+        display: none;
+        background-color: #ffffff;
+        border: 1px solid grey;
+        color: #252a2b;
+    }
+
+    .product-card_2:hover .view-details-btn {
+        display: block;
+    }
+
+    #prevBtn_2, #nextBtn_2 {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+    }
+
+    #prevBtn_2 {
+        left: 10px;
+    }
+
+    #nextBtn_2 {
+        right: 10px;
+    }
+
+    .product-info_2 {
+        margin-bottom: 10px;
+    }
+</style>
+
+
+<!-- Start brand Area -->
+<section class="brand-area section_gap">
+    <div class="container">
+        <div class="row">
+            <a class="col single-img" href="#">
+                <img class="img-fluid d-block mx-auto" src="~/Content/img/brand/1.png" alt="">
+            </a>
+            <a class="col single-img" href="#">
+                <img class="img-fluid d-block mx-auto" src="~/Content/img/brand/2.png" alt="">
+            </a>
+            <a class="col single-img" href="#">
+                <img class="img-fluid d-block mx-auto" src="~/Content/img/brand/3.png" alt="">
+            </a>
+            <a class="col single-img" href="#">
+                <img class="img-fluid d-block mx-auto" src="~/Content/img/brand/4.png" alt="">
+            </a>
+            <a class="col single-img" href="#">
+                <img class="img-fluid d-block mx-auto" src="~/Content/img/brand/5.png" alt="">
+            </a>
+        </div>
+    </div>
+</section>
+<!-- End brand Area -->
+
+@if (Model != null && Model.Any())
+{
+
+    <section class="container position-relative mt-2 mb-2">
+        <h2 class="text-center">SẢN PHẨM MỚI</h2>
+        <div id="productSlider_2" class="row flex-row flex-nowrap overflow-auto">
+            @foreach (var spHomeView in Model)
+            {
+                <div class="product-card_2">
+                    <div class="product-image_2">
+
+                        <a href="@Url.Action("HienThiSanpham1", "SanPham", new { masanpham = spHomeView.spct.MaSP, maspct = spHomeView.spct.MaChiTietSP })">
+
+                            <img src="@Url.Content("~/Content/img/" + (spHomeView.spct.MaSP) + "/" + (spHomeView.spct.AnhDaiDien ?? "placeholder.png"))" alt="Product Image">
+                            <p class="text-top-right"><strong>Mới</strong></p>
+                        </a>
+                    </div>
+                    <div class="product-info_2">
+
+                        <h5 style="text-align:left" class="mt-2">@(spHomeView.spct.MaSPNavigation.TenSanPham) @(spHomeView.spct.MaMauNavigation.TenMau)</h5>
+                        <h5 style="text-align:left">@(spHomeView.spct.MaSPNavigation.GiaSanPham.ToString("#,##0"))đ</h5>
+                    </div>
+
+                    @Html.ActionLink("Xem chi tiết", "HienThiSanpham1", "SanPham",
+                                  new { masanpham = spHomeView.spct.MaSP, maspct = spHomeView.spct.MaChiTietSP },
+                                  new { @class = "btn btn-primary view-details-btn" })
+                </div>
+            }
+        </div>
+        <button class="btn btn-primary" id="prevBtn_2"><i class="bi bi-chevron-left"></i></button>
+        <button class="btn btn-primary" id="nextBtn_2"><i class="bi bi-chevron-right"></i></button>
+    </section>
+
+    <script>
+       
+        $(document).ready(function () {
+
+            // Lấy các element cần thiết
+            const productSlider_2 = document.getElementById('productSlider_2');
+            const prevBtn_2 = document.getElementById('prevBtn_2');
+            const nextBtn_2 = document.getElementById('nextBtn_2');
+            const cardElement_2 = document.querySelector('.product-card_2');
+
+            // BẮT BUỘC: Chỉ chạy script nếu tất cả các element cần thiết đều tồn tại
+            if (productSlider_2 && prevBtn_2 && nextBtn_2 && cardElement_2) {
+
+                let scrollPosition_2 = 0;
+                let manualScroll_2 = false;
+
+                // Thêm 20px (margin-right) vào chiều rộng của card để cuộn chính xác
+                const cardWidth_2 = cardElement_2.offsetWidth + 20;
+
+                const nextSlide_2 = () => {
+                    // Kiểm tra lại để tránh lỗi nếu slider bị ẩn đi
+                    if (productSlider_2.scrollWidth <= productSlider_2.clientWidth) return;
+
+                    if (scrollPosition_2 < productSlider_2.scrollWidth - productSlider_2.clientWidth) {
+                        scrollPosition_2 += cardWidth_2;
+                    } else {
+                        scrollPosition_2 = 0; // Quay về đầu nếu đã đến cuối
+                    }
+                    productSlider_2.scroll({ left: scrollPosition_2, behavior: 'smooth' });
+                };
+
+                prevBtn_2.addEventListener('click', () => {
+                    if (scrollPosition_2 > 0) {
+                        scrollPosition_2 -= cardWidth_2;
+                        productSlider_2.scroll({ left: scrollPosition_2, behavior: 'smooth' });
+                    }
+                });
+
+                nextBtn_2.addEventListener('click', () => {
+                    nextSlide_2();
+                });
+
+                // Tự động trượt
+                setInterval(() => {
+                    if (!manualScroll_2) {
+                        nextSlide_2();
+                    }
+                }, 5000);
+
+                // Xử lý khi người dùng tự cuộn
+                productSlider_2.addEventListener('scroll', () => {
+                    scrollPosition_2 = productSlider_2.scrollLeft;
+                    manualScroll_2 = true;
+                    // Đặt lại cờ sau một khoảng thời gian ngắn
+                    setTimeout(() => {
+                        manualScroll_2 = false;
+                    }, 200);
+                });
+            }
+        });
+    </script>
+}
+else
+{
+    <div class="container text-center py-5">
+        <p>Hiện chưa có sản phẩm mới nào.</p>
+    </div>
+}

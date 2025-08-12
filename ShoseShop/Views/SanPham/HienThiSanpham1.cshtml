@@ -1,0 +1,427 @@
+﻿@using ShoseShop.ViewModel
+@model ChiTietSanphamViewModel
+
+@{
+    ViewBag.Title = Model?.sanphams?.TenSanPham ?? "Chi tiết sản phẩm";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@section Scripts {
+    <script>
+      
+        function updateIndex(element, index, sizeName) {
+            var h5Span = document.getElementById("sizeError");
+            h5Span.style.visibility = "hidden";
+
+          
+            var sltonArray = @Html.Raw(Json.Encode(Model.slton ?? new List<int>()));
+            var slton = document.getElementById("slton");
+
+            if (sltonArray.length > index) {
+                if (sltonArray[index] > 0 && sltonArray[index] < 10) {
+                    slton.style.display = "block";
+                } else {
+                    slton.style.display = "none";
+                }
+
+                var elements = document.getElementsByClassName("box-kho");
+                for (var i = 0; i < elements.length; ++i) {
+                    elements[i].classList.remove("active");
+                }
+                element.classList.add("active");
+
+                var productId = @Html.Raw(Json.Encode(Model.sanphamct?.FirstOrDefault()?.MaChiTietSP ?? 0));
+                var addToCartUrl = '@Url.Action("AddToCart", "ShoppingCart", new { id = "__productId__", tenSize = "__sizeName__", slton = "__slton__" })';
+                addToCartUrl = addToCartUrl.replace("__productId__", productId)
+                                       .replace("__sizeName__", sizeName)
+                                       .replace("__slton__", sltonArray[index]);
+
+                document.getElementById("AddToCart").href = addToCartUrl;
+            }
+        }
+
+        function NotChooseSize(event) {
+            var addToCartLink = document.getElementById("AddToCart");
+            if (addToCartLink.getAttribute("href") === "#") {
+                event.preventDefault();
+                document.getElementById("sizeError").style.visibility = "visible";
+            }
+        }
+
+        function changeImage(event, element) {
+            event.preventDefault();
+            const imagePath = element.getAttribute('data-image-path');
+            const mainImage = document.querySelector('.single-prd-main .img-fluid');
+            if (mainImage && imagePath) {
+                mainImage.src = imagePath;
+            }
+        }
+
+        // Countdown Timer
+        (function() {
+            var ngaykt = @Html.Raw(Json.Encode(Model.sanphams?.KhuyenMais?.FirstOrDefault()?.NgayKetThuc));
+            if (!ngaykt) return;
+
+            var countDownDate = new Date(ngaykt).getTime();
+            var countdownTimerDiv = document.getElementById("countdown-timer");
+
+            var x = setInterval(function () {
+                var now = new Date().getTime();
+                var distance = countDownDate - now;
+
+                if (distance < 0) {
+                    clearInterval(x);
+                    if (countdownTimerDiv) {
+                        countdownTimerDiv.innerHTML = "<h5 class='text-danger'>Đã hết hạn</h5>";
+                    }
+                    return;
+                }
+
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("days").innerText = days;
+                document.getElementById("hours").innerText = hours;
+                document.getElementById("minutes").innerText = minutes;
+                document.getElementById("seconds").innerText = seconds;
+            }, 1000);
+        })();
+
+        // Accordion
+        function accordionClick(index) {
+			const accordionContents = document.getElementsByClassName("accordion-content");
+			const current = accordionContents[index];
+            if (current) {
+			    current.classList.toggle("open");
+            }
+		}
+    </script>
+}
+
+<style>
+    .s_Product_carousel {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .single-prd-main {
+        margin-bottom: 10px;
+    }
+
+    .single-prd-detail {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .single-prd-detail {
+        margin-bottom: 10px;
+    }
+
+    .item-detail {
+        width: 500px;
+    }
+
+    .item-detail1 {
+        margin: 15px;
+    }
+
+    .item-detail-video {
+        width: 400px;
+    }
+
+    .product-images img {
+        max-width: 100px; /* Adjust this value as needed */
+        max-height: 100px; /* Adjust this value as needed */
+        margin-right: 10px; /* Optional: Add some spacing between images */
+    }
+
+        .product-images img:hover {
+            transform: scale(1.1); /* Increase size on hover */
+            cursor: pointer; /* Change cursor to pointer on hover */
+        }
+
+    .box-kho {
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        padding: 8px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        color: #111111;
+        font-size: 16px;
+    }
+
+        .box-kho:hover {
+            border-color: #111111;
+        }
+
+        .box-kho.active {
+            border-color: #111111;
+        }
+
+    .kho-disable {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    .accordion {
+        width: 100%;
+        max-width: 600px;
+        margin: auto;
+    }
+
+    .accordion-header {
+        background-color: #ccc;
+        color: #000;
+        padding: 15px;
+        text-align: left;
+        font-size: 18px;
+        cursor: pointer;
+        width: 100%;
+        border: none;
+        outline: none;
+        transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /*.accordion-header:hover {
+        background-color: #888;
+    }*/
+
+    .accordion-content {
+        padding: 0 18px;
+        display: none;
+        color: #000;
+        overflow: hidden;
+        background-color: #fff;
+    }
+
+    .accordion-item:has(.accordion-content.open) .accordion-header {
+        background-color: #fff;
+        padding-bottom: 0;
+    }
+
+        .accordion-item:has(.accordion-content.open) .accordion-header .icon {
+            transform: rotate(180deg);
+        }
+
+    .accordion-item {
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        margin-top: 8px;
+        overflow: hidden;
+    }
+
+    .accordion-content.open {
+        display: block;
+    }
+
+    .p-16 {
+        padding: 16px 0;
+    }
+</style>
+
+
+@if (Model != null && Model.sanphams != null && Model.sanphamct != null && Model.sanphamct.Any() && Model.sanphams != null)
+{
+    var firstProductDetail = Model.sanphamct.First();
+
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>Chi tiết sản phẩm</h1>
+                    <nav class="d-flex align-items-center">
+                        <a href="@Url.Action("Index", "Home")">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="#">Mua sắm<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="#">@Model.sanphams.TenSanPham</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="product_image_area">
+        <div class="container">
+            <div class="row s_product_inner">
+                <div class="col-lg-6">
+                    <div class="s_Product_carousel">
+                        <div class="single-prd-main">
+                            <img class="img-fluid" src="@Url.Content("~/Content/img/" + firstProductDetail.MaSP + "/" + firstProductDetail.AnhDaiDien)" alt="Ảnh đại diện">
+                        </div>
+                    </div>
+                    <div class="single-prd-detail">
+                        <div class="single-prd-top d-flex">
+                            <div class="single-prd-item item-detail item-detail1">
+                                <img class="img-fluid" src="@Url.Content("~/Content/img/" + firstProductDetail.MaSP + "/" + firstProductDetail.AnhMatTren)" alt="Ảnh mặt trên">
+                            </div>
+                            <div class="single-prd-item item-detail">
+                                <img class="img-fluid" src="@Url.Content("~/Content/img/" + firstProductDetail.MaSP + "/" + firstProductDetail.AnhDeGiay)" alt="Ảnh đế giày">
+                            </div>
+                        </div>
+                        <div class="single-prd-bottom">
+                            @if (!string.IsNullOrEmpty(firstProductDetail.Video))
+                            {
+                                <div class="video-wrapper item-detail">
+                                    <video controls width="100%" height="auto">
+                                        <source src="@Url.Content("~/Content/video/" + firstProductDetail.MaSP + "/" + firstProductDetail.Video)" alt="Video" type="video/webm">
+                                        <!-- Thêm các định dạng video khác nếu cần -->
+                                        Trình duyệt của bạn không hỗ trợ thẻ video.
+                                    </video>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-5 offset-lg-1">
+                    <div class="s_product_text">
+                        <h3>@Model.sanphams.TenSanPham</h3>
+
+                        @if (Model.sanphams.KhuyenMais != null && Model.sanphams.KhuyenMais.Any())
+                        {
+                            var km = Model.sanphams.KhuyenMais.First();
+                            if (km != null)
+                            {
+                                decimal? priceSale = Model.sanphams.GiaSanPham - (Model.sanphams.GiaSanPham * km.PhanTramGiam / 100);
+                                <div class="row">
+                                    <div class="col-7">
+                                        <h2 style="display:inline;">@(priceSale?.ToString("#,##0"))₫</h2>
+                                        <h5 style="display:inline;"><span style="text-decoration:line-through;color:#cccccc;">@Model.sanphams.GiaSanPham.ToString("#,##0")₫</span></h5>
+                                        <h5 class="mt-1" style="color:green;">@km.PhanTramGiam% off</h5>
+                                    </div>
+                                    <div id="countdown-timer" class="col-5 d-flex justify-content-center align-items-center" style="background-color: #f26921;font-weight:bold;border-radius:2px;color:white">
+                                        <h5 style="margin: 0;color:white"><span id="days">00</span>:<span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span></h5>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <h2>@Model.sanphams.GiaSanPham.ToString("#,##0")₫</h2>
+                            }
+                        }
+
+
+                        <div class="product-images row mt-3" style="margin-left:auto;margin-bottom:15px">
+                            @foreach (var sp in Model.sanphamct)
+                            {
+                                <a href="#" data-image-path="@Url.Content("~/Content/img/" + sp.MaSP + "/" + sp.AnhDaiDien)" onclick="changeImage(event, this)">
+                                    <img src="@Url.Content("~/Content/img/" + sp.MaSP + "/" + sp.AnhDaiDien)" alt="Hình ảnh sản phẩm">
+                                </a>
+                            }
+                        </div>
+
+                        <div id="slton" style="display:none;"><h5 style="color: #BA861E;"><i class="fas fa-clock" style="color: #BA861E;"></i> Chỉ còn lại một vài. Hãy đặt hàng sớm!</h5></div>
+
+                        <div class="row" style="margin-top: 5px;margin-bottom:5px">
+                            <div class="col-12"><h5 class="text-left">Bảng kích thước</h5></div>
+                            @if (Model.tenSize != null && Model.slton != null)
+                            {
+                                for (int i = 0; i < Model.tenSize.Count(); i++)
+                                {
+                                    <div class="col-lg-3 col-md-4 col-sm-6 " style="max-width: 80px; max-height:50px">
+                                        @{
+                                            string boxClass = Model.slton[i] > 0 ? "box-kho" : "box-kho kho-disable disabled";
+                                            string onClick = Model.slton[i] > 0 ? $"updateIndex(this, {i}, '{Model.tenSize[i]}')" : "";
+                                        }
+                                        <div class="@boxClass text-center" onclick="@onClick">@Model.tenSize[i]</div>
+                                    </div>
+                                }
+                            }
+                            <div class="col-12 "><h5 class="text-left" id="sizeError" style="color:red;visibility:hidden">Vui lòng chọn kích thước</h5></div>
+                        </div>
+
+                 
+                        <div class="card_area d-flex align-items-center">
+                            <a id="AddToCart" class="primary-btn" onclick="NotChooseSize(event)" href="#">Thêm vào giỏ hàng</a>
+                            @Html.ActionLink(" ", "AddFavouriteProducts", "FavouriteProducts", new { id = ViewBag.masp }, new { @class = "icon_btn lnr lnr-heart" })
+                        </div>
+
+                        <!-- Accordion -->
+                        <div class="accordion" style="margin-top: 32px">
+                            <div class="accordion-item">
+                                <div class="accordion-header" onclick="accordionClick(0)">
+                                    <span>Mô tả sản phẩm</span>
+                                    <span class="lnr lnr-chevron-down icon"></span>
+                                </div>
+                                <div class="accordion-content">
+                                    <ul class="p-16">
+                                        <li>- Cải tiến với đế 2 lớp phylon cao su êm, bền, chặt</li>
+                                        <li>- Cao 5cm hack dáng tự tin, dễ dàng phối mọi outfit</li>
+                                        <li>- Form giày chắc chân, dễ vệ sinh</li>
+                                        <li>- Kháng khuẩn, nhẹ êm</li>
+                                        <li>- Dễ dàng chọn lựa & phù hợp mọi phong cách</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header" onclick="accordionClick(1)">
+                                    <span>Thông tin bảo hành</span>
+                                    <span class="lnr lnr-chevron-down icon"></span>
+                                </div>
+                                <div class="accordion-content">
+                                    <ul class="pt-16">
+                                        <li>Thông tin bảo hành chi tiết sẽ được cung cấp khi mua sản phẩm.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header" onclick="accordionClick(2)">
+                                    <span>Chính sách đổi trả</span>
+                                    <span class="lnr lnr-chevron-down icon"></span>
+                                </div>
+                                <div class="accordion-content">
+                                    <ul class="p-16">
+                                        <li>Chính sách đổi trả áp dụng trong vòng 30 ngày kể từ ngày mua.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="product_description_area">
+        <div class="container">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item"><a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab">Mô tả sản phẩm</a></li>
+                <li class="nav-item"><a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab">Đánh giá</a></li>
+                <li class="nav-item"><a class="nav-link" id="sizes-tab" data-toggle="tab" href="#sizes" role="tab">Bảng kích thước</a></li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade" id="home" role="tabpanel">
+                    <p>@Model.sanphams.MoTa</p>
+                </div>
+                <div class="tab-pane fade show active" id="review" role="tabpanel">
+                    <div class="row">
+
+                        @{ Html.RenderAction("ShowComment", "SanPham", new { masp = Model.sanphams.MaSanPham }); }
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="sizes" role="tabpanel">
+                    <div class="row justify-content-center">
+                        <img src="@Url.Content("~/Content/img/size/sizes.jpg")" style="width: 50%; height: auto;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+     Html.RenderAction("HomeProductSlider2", "Home", new { trangthai = 4 }); 
+}
+else
+{
+    <div class="container text-center py-5">
+        <h2>Sản phẩm không tồn tại</h2>
+        <p>Rất tiếc, chúng tôi không thể tìm thấy sản phẩm bạn yêu cầu. Vui lòng quay lại trang chủ.</p>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Về trang chủ</a>
+    </div>
+}

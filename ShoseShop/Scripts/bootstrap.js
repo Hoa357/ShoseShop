@@ -364,7 +364,7 @@
     mouseenter: 'mouseover',
     mouseleave: 'mouseout'
   };
-  const nativeEvents = new Set(['click', 'dblclick', 'mouseup', 'mousedown', 'contextmenu', 'mousewheel', 'DOMMouseScroll', 'mouseover', 'mouseout', 'mousemove', 'selectstart', 'selectend', 'keydown', 'keypress', 'keyup', 'orientationchange', 'touchstart', 'touchmove', 'touchend', 'touchcancel', 'pointerdown', 'pointermove', 'pointerup', 'pointerleave', 'pointercancel', 'gesturestart', 'gesturechange', 'gestureend', 'focus', 'blur', 'change', 'reset', 'select', 'submit', 'focusin', 'focusout', 'load', 'unload', 'beforeunload', 'resize', 'move', 'DOMContentLoaded', 'readystatechange', 'error', 'abort', 'scroll']);
+  const nativeEvents = new Set(['click', 'dblclick', 'mouseup', 'mousedown', '_dbmenu', 'mousewheel', 'DOMMouseScroll', 'mouseover', 'mouseout', 'mousemove', 'selectstart', 'selectend', 'keydown', 'keypress', 'keyup', 'orientationchange', 'touchstart', 'touchmove', 'touchend', 'touchcancel', 'pointerdown', 'pointermove', 'pointerup', 'pointerleave', 'pointercancel', 'gesturestart', 'gesturechange', 'gestureend', 'focus', 'blur', 'change', 'reset', 'select', 'submit', 'focusin', 'focusout', 'load', 'unload', 'beforeunload', 'resize', 'move', 'DOMContentLoaded', 'readystatechange', 'error', 'abort', 'scroll']);
   /**
    * Private methods
    */
@@ -2333,33 +2333,33 @@
       const openToggles = SelectorEngine.find(SELECTOR_DATA_TOGGLE_SHOWN);
 
       for (const toggle of openToggles) {
-        const context = Dropdown.getInstance(toggle);
+        const _db = Dropdown.getInstance(toggle);
 
-        if (!context || context._config.autoClose === false) {
+        if (!_db || _db._config.autoClose === false) {
           continue;
         }
 
         const composedPath = event.composedPath();
-        const isMenuTarget = composedPath.includes(context._menu);
+        const isMenuTarget = composedPath.includes(_db._menu);
 
-        if (composedPath.includes(context._element) || context._config.autoClose === 'inside' && !isMenuTarget || context._config.autoClose === 'outside' && isMenuTarget) {
+        if (composedPath.includes(_db._element) || _db._config.autoClose === 'inside' && !isMenuTarget || _db._config.autoClose === 'outside' && isMenuTarget) {
           continue;
         } // Tab navigation through the dropdown menu or events from contained inputs shouldn't close the menu
 
 
-        if (context._menu.contains(event.target) && (event.type === 'keyup' && event.key === TAB_KEY$1 || /input|select|option|textarea|form/i.test(event.target.tagName))) {
+        if (_db._menu.contains(event.target) && (event.type === 'keyup' && event.key === TAB_KEY$1 || /input|select|option|textarea|form/i.test(event.target.tagName))) {
           continue;
         }
 
         const relatedTarget = {
-          relatedTarget: context._element
+          relatedTarget: _db._element
         };
 
         if (event.type === 'click') {
           relatedTarget.clickEvent = event;
         }
 
-        context._completeHide(relatedTarget);
+        _db._completeHide(relatedTarget);
       }
     }
 
@@ -4130,26 +4130,26 @@
       for (const trigger of triggers) {
         if (trigger === 'click') {
           EventHandler.on(this._element, this.constructor.eventName(EVENT_CLICK$1), this._config.selector, event => {
-            const context = this._initializeOnDelegatedTarget(event);
+            const _db = this._initializeOnDelegatedTarget(event);
 
-            context.toggle();
+            _db.toggle();
           });
         } else if (trigger !== TRIGGER_MANUAL) {
           const eventIn = trigger === TRIGGER_HOVER ? this.constructor.eventName(EVENT_MOUSEENTER) : this.constructor.eventName(EVENT_FOCUSIN$1);
           const eventOut = trigger === TRIGGER_HOVER ? this.constructor.eventName(EVENT_MOUSELEAVE) : this.constructor.eventName(EVENT_FOCUSOUT$1);
           EventHandler.on(this._element, eventIn, this._config.selector, event => {
-            const context = this._initializeOnDelegatedTarget(event);
+            const _db = this._initializeOnDelegatedTarget(event);
 
-            context._activeTrigger[event.type === 'focusin' ? TRIGGER_FOCUS : TRIGGER_HOVER] = true;
+            _db._activeTrigger[event.type === 'focusin' ? TRIGGER_FOCUS : TRIGGER_HOVER] = true;
 
-            context._enter();
+            _db._enter();
           });
           EventHandler.on(this._element, eventOut, this._config.selector, event => {
-            const context = this._initializeOnDelegatedTarget(event);
+            const _db = this._initializeOnDelegatedTarget(event);
 
-            context._activeTrigger[event.type === 'focusout' ? TRIGGER_FOCUS : TRIGGER_HOVER] = context._element.contains(event.relatedTarget);
+            _db._activeTrigger[event.type === 'focusout' ? TRIGGER_FOCUS : TRIGGER_HOVER] = _db._element.contains(event.relatedTarget);
 
-            context._leave();
+            _db._leave();
           });
         }
       }

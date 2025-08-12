@@ -1,33 +1,83 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
+@model List<ShoseShop.Data.Banner>
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+<!-- start banner Area -->
+<section class="banner-area">
+    <div class="container">
+        <div class="row fullscreen align-items-center justify-content-start">
+            <div class="col-lg-12">
+                <div class="active-banner-slider owl-carousel">
+
+                    
+                    @if (Model != null && Model.Any())
+                    {
+                     
+                        foreach (var banner in Model)
+                        {
+                            <div class="row single-slide align-items-center d-flex">
+                                <div class="col-lg-5 col-md-6">
+                                    <div class="banner-content">
+                                        <h1>@banner.Tenbanner</h1>
+                                        <h3>@banner.Slogan</h3>
+                                        <div class="add-bag d-flex align-items-center">
+                                          
+                                            <a class="primary-btn" href="@Url.Action("Index", "SanPham")">Mua sắm bây giờ</a>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="banner-img">
+                                        <a href="@Url.Action("Index", "SanPham")">
+                                          
+                                            <img class="img-fluid" style="max-width:657px;max-height:394px;"
+                                                 src="@Url.Content("~/Content/img/banner/" + banner.Vitri)" alt="@banner.Tenbanner">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        
+                        <div class="row single-slide align-items-center d-flex">
+                            <div class="col-lg-5 col-md-6">
+                                <div class="banner-content">
+                                    <h1>Bộ Sưu Tập Mới</h1>
+                                    <h3>Chào mừng đến với cửa hàng</h3>
+                                    <div class="add-bag d-flex align-items-center">
+                                        <a class="primary-btn" href="@Url.Action("Index", "SanPham")">Mua sắm bây giờ</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="banner-img">
+                                    <img class="img-fluid" src="@Url.Content("~/Content/img/banner/default-banner.png")" alt="Default Banner">
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
     </div>
-</main>
+</section>
+<!-- End banner Area -->
+
+
+@if (Session["Khuyenmai"] != null && (int)Session["Khuyenmai"] == 1)
+{
+    @Html.Action("PdSliderSale", "Home")
+}
+
+<div class="my-4"></div>
+
+@Html.Action("HomeProductSlider", "Home", new { trangthai = 3 })
+@Html.Action("HomeProductSlider2", "Home", new { trangthai = 4 })
+

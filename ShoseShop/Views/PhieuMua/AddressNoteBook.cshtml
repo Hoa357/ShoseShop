@@ -1,0 +1,73 @@
+﻿@using ShoseShop.ViewModel
+@model PhieuMuaViewModel
+
+<style>
+   
+    .addressBlock {
+        width: 570px;
+        height: 75px;
+        border-radius: 3px;
+        border: solid 1px #ccc;
+        background-color: #FFFFFF;
+        padding: 10px;
+        margin-bottom: 10px;
+        position: relative;
+    }
+
+        .addressBlock:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .addressBlock .btn-choose {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+</style>
+
+
+<a data-toggle="modal" data-target="#addressModal" style="cursor:pointer;" class="float-right">
+    <i class="bi bi-journal-bookmark-fill"></i>
+    <span style="text-decoration:underline;color:orange">Chọn từ sổ địa chỉ</span>
+</a>
+
+
+<div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="addressModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="max-width: 600px;">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title" id="addressModalLabel">Sổ địa chỉ của bạn</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+     
+                @if (Model != null && Model.SoDiaChis != null && Model.SoDiaChis.Any())
+                {
+                    foreach (var address in Model.SoDiaChis)
+                    {
+                        <div class="addressBlock">
+                            <h3 style="font-size:14px; font-weight: bold;">@address.TenNguoiNhan - @address.SoDTNguoiNhan</h3>
+                            <p>@address.DiaChi</p>
+
+                          
+                            <a href="#" class="btn btn-info btn-choose changeAddressButton"
+                               data-address-id="@address.MaSoDiaChi"
+                               data-dismiss="modal">Chọn</a>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>Bạn chưa có địa chỉ nào được lưu.</p>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+               
+            </div>
+        </div>
+    </div>
+</div>

@@ -18,13 +18,13 @@ namespace ShoseShop.Data
 
         public virtual ICollection<SoDiaChi> MaSoDCs { get; set; } = new List<SoDiaChi>();
 
-        public virtual ICollection<BinhLuan> Binhluans { get; set; } = new List<BinhLuan>();
+        public virtual ICollection<BinhLuan> BinhLuans { get; set; } = new List<BinhLuan>();
 
        
         public virtual TaiKhoan EmailNavigation { get; set; }
 
         public virtual ICollection<PhieuMua> Phieumuas { get; set; } = new List<PhieuMua>();
 
-        public virtual ICollection<SoDiaChi> Sodiachis { get; set; } = new List<SoDiaChi>();
+        public virtual ICollection<SoDiaChi> SoDiaChis { get; set; } = new List<SoDiaChi>();
     }
 }

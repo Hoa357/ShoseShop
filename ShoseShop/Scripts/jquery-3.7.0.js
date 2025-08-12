@@ -115,7 +115,7 @@ var document = window.document;
 				// Some browsers don't support the "nonce" property on scripts.
 				// On the other hand, just using `getAttribute` is not enough as
 				// the `nonce` attribute is reset to an empty string whenever it
-				// becomes browsing-context connected.
+				// becomes browsing-_db connected.
 				// See https://github.com/whatwg/html/issues/2369
 				// See https://html.spec.whatwg.org/#nonce-attributes
 				// The `node.getAttribute` check was added for the sake of
@@ -152,11 +152,11 @@ var version = "3.7.0",
 	rhtmlSuffix = /HTML$/i,
 
 	// Define a local copy of jQuery
-	jQuery = function( selector, context ) {
+	jQuery = function( selector, _db ) {
 
 		// The jQuery object is actually just the init constructor 'enhanced'
 		// Need init if jQuery is called (just allow error to be thrown if not included)
-		return new jQuery.fn.init( selector, context );
+		return new jQuery.fn.init( selector, _db );
 	};
 
 jQuery.fn = jQuery.prototype = {
@@ -368,7 +368,7 @@ jQuery.extend( {
 		return true;
 	},
 
-	// Evaluates a script in a provided context; falls back to the global one
+	// Evaluates a script in a provided _db; falls back to the global one
 	// if not specified.
 	globalEval: function( code, options, doc ) {
 		DOMEval( code, { nonce: options && options.nonce }, doc );
@@ -632,7 +632,7 @@ var preferredDoc = document,
 
 var i,
 	Expr,
-	outermostContext,
+	outermost_db,
 	sortInput,
 	hasDuplicate,
 	push = pushNative,
@@ -716,7 +716,7 @@ var i,
 
 		// For use in libraries implementing .is()
 		// We use this for POS matching in `select`
-		needsContext: new RegExp( "^" + whitespace +
+		needs_db: new RegExp( "^" + whitespace +
 			"*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\(" + whitespace +
 			"*((?:-\\d)?\\d*)" + whitespace + "*\\)|)(?=[^-]|$)", "i" )
 	},
@@ -797,16 +797,16 @@ try {
 	};
 }
 
-function find( selector, context, results, seed ) {
+function find( selector, _db, results, seed ) {
 	var m, i, elem, nid, match, groups, newSelector,
-		newContext = context && context.ownerDocument,
+		new_db = _db && _db.ownerDocument,
 
-		// nodeType defaults to 9, since context defaults to document
-		nodeType = context ? context.nodeType : 9;
+		// nodeType defaults to 9, since _db defaults to document
+		nodeType = _db ? _db.nodeType : 9;
 
 	results = results || [];
 
-	// Return early from calls with invalid selector or context
+	// Return early from calls with invalid selector or _db
 	if ( typeof selector !== "string" || !selector ||
 		nodeType !== 1 && nodeType !== 9 && nodeType !== 11 ) {
 
@@ -815,21 +815,21 @@ function find( selector, context, results, seed ) {
 
 	// Try to shortcut find operations (as opposed to filters) in HTML documents
 	if ( !seed ) {
-		setDocument( context );
-		context = context || document;
+		setDocument( _db );
+		_db = _db || document;
 
 		if ( documentIsHTML ) {
 
 			// If the selector is sufficiently simple, try using a "get*By*" DOM method
-			// (excepting DocumentFragment context, where the methods don't exist)
+			// (excepting DocumentFragment _db, where the methods don't exist)
 			if ( nodeType !== 11 && ( match = rquickExpr.exec( selector ) ) ) {
 
 				// ID selector
 				if ( ( m = match[ 1 ] ) ) {
 
-					// Document context
+					// Document _db
 					if ( nodeType === 9 ) {
-						if ( ( elem = context.getElementById( m ) ) ) {
+						if ( ( elem = _db.getElementById( m ) ) ) {
 
 							// Support: IE 9 only
 							// getElementById can match elements by name instead of ID
@@ -841,13 +841,13 @@ function find( selector, context, results, seed ) {
 							return results;
 						}
 
-					// Element context
+					// Element _db
 					} else {
 
 						// Support: IE 9 only
 						// getElementById can match elements by name instead of ID
-						if ( newContext && ( elem = newContext.getElementById( m ) ) &&
-							find.contains( context, elem ) &&
+						if ( new_db && ( elem = new_db.getElementById( m ) ) &&
+							find.contains( _db, elem ) &&
 							elem.id === m ) {
 
 							push.call( results, elem );
@@ -857,12 +857,12 @@ function find( selector, context, results, seed ) {
 
 				// Type selector
 				} else if ( match[ 2 ] ) {
-					push.apply( results, context.getElementsByTagName( selector ) );
+					push.apply( results, _db.getElementsByTagName( selector ) );
 					return results;
 
 				// Class selector
-				} else if ( ( m = match[ 3 ] ) && context.getElementsByClassName ) {
-					push.apply( results, context.getElementsByClassName( m ) );
+				} else if ( ( m = match[ 3 ] ) && _db.getElementsByClassName ) {
+					push.apply( results, _db.getElementsByClassName( m ) );
 					return results;
 				}
 			}
@@ -872,35 +872,35 @@ function find( selector, context, results, seed ) {
 				( !rbuggyQSA || !rbuggyQSA.test( selector ) ) ) {
 
 				newSelector = selector;
-				newContext = context;
+				new_db = _db;
 
 				// qSA considers elements outside a scoping root when evaluating child or
 				// descendant combinators, which is not what we want.
 				// In such cases, we work around the behavior by prefixing every selector in the
-				// list with an ID selector referencing the scope context.
+				// list with an ID selector referencing the scope _db.
 				// The technique has to be used as well when a leading combinator is used
 				// as such selectors are not recognized by querySelectorAll.
 				// Thanks to Andrew Dupont for this technique.
 				if ( nodeType === 1 &&
 					( rdescend.test( selector ) || rleadingCombinator.test( selector ) ) ) {
 
-					// Expand context for sibling selectors
-					newContext = rsibling.test( selector ) && testContext( context.parentNode ) ||
-						context;
+					// Expand _db for sibling selectors
+					new_db = rsibling.test( selector ) && test_db( _db.parentNode ) ||
+						_db;
 
 					// We can use :scope instead of the ID hack if the browser
-					// supports it & if we're not changing the context.
+					// supports it & if we're not changing the _db.
 					// Support: IE 11+, Edge 17 - 18+
 					// IE/Edge sometimes throw a "Permission denied" error when
 					// strict-comparing two documents; shallow comparisons work.
 					// eslint-disable-next-line eqeqeq
-					if ( newContext != context || !support.scope ) {
+					if ( new_db != _db || !support.scope ) {
 
-						// Capture the context ID, setting it first if necessary
-						if ( ( nid = context.getAttribute( "id" ) ) ) {
+						// Capture the _db ID, setting it first if necessary
+						if ( ( nid = _db.getAttribute( "id" ) ) ) {
 							nid = jQuery.escapeSelector( nid );
 						} else {
-							context.setAttribute( "id", ( nid = expando ) );
+							_db.setAttribute( "id", ( nid = expando ) );
 						}
 					}
 
@@ -916,14 +916,14 @@ function find( selector, context, results, seed ) {
 
 				try {
 					push.apply( results,
-						newContext.querySelectorAll( newSelector )
+						new_db.querySelectorAll( newSelector )
 					);
 					return results;
 				} catch ( qsaError ) {
 					nonnativeSelectorCache( selector, true );
 				} finally {
 					if ( nid === expando ) {
-						context.removeAttribute( "id" );
+						_db.removeAttribute( "id" );
 					}
 				}
 			}
@@ -931,7 +931,7 @@ function find( selector, context, results, seed ) {
 	}
 
 	// All others
-	return select( selector.replace( rtrimCSS, "$1" ), context, results, seed );
+	return select( selector.replace( rtrimCSS, "$1" ), _db, results, seed );
 }
 
 /**
@@ -1088,12 +1088,12 @@ function createPositionalPseudo( fn ) {
 }
 
 /**
- * Checks a node for validity as a jQuery selector context
- * @param {Element|Object=} context
+ * Checks a node for validity as a jQuery selector _db
+ * @param {Element|Object=} _db
  * @returns {Element|Object|Boolean} The input node if acceptable, otherwise a falsy value
  */
-function testContext( context ) {
-	return context && typeof context.getElementsByTagName !== "undefined" && context;
+function test_db( _db ) {
+	return _db && typeof _db.getElementsByTagName !== "undefined" && _db;
 }
 
 /**
@@ -1187,9 +1187,9 @@ function setDocument( node ) {
 				return elem.getAttribute( "id" ) === attrId;
 			};
 		};
-		Expr.find.ID = function( id, context ) {
-			if ( typeof context.getElementById !== "undefined" && documentIsHTML ) {
-				var elem = context.getElementById( id );
+		Expr.find.ID = function( id, _db ) {
+			if ( typeof _db.getElementById !== "undefined" && documentIsHTML ) {
+				var elem = _db.getElementById( id );
 				return elem ? [ elem ] : [];
 			}
 		};
@@ -1205,10 +1205,10 @@ function setDocument( node ) {
 
 		// Support: IE 6 - 7 only
 		// getElementById is not reliable as a find shortcut
-		Expr.find.ID = function( id, context ) {
-			if ( typeof context.getElementById !== "undefined" && documentIsHTML ) {
+		Expr.find.ID = function( id, _db ) {
+			if ( typeof _db.getElementById !== "undefined" && documentIsHTML ) {
 				var node, i, elems,
-					elem = context.getElementById( id );
+					elem = _db.getElementById( id );
 
 				if ( elem ) {
 
@@ -1219,7 +1219,7 @@ function setDocument( node ) {
 					}
 
 					// Fall back on getElementsByName
-					elems = context.getElementsByName( id );
+					elems = _db.getElementsByName( id );
 					i = 0;
 					while ( ( elem = elems[ i++ ] ) ) {
 						node = elem.getAttributeNode( "id" );
@@ -1235,20 +1235,20 @@ function setDocument( node ) {
 	}
 
 	// Tag
-	Expr.find.TAG = function( tag, context ) {
-		if ( typeof context.getElementsByTagName !== "undefined" ) {
-			return context.getElementsByTagName( tag );
+	Expr.find.TAG = function( tag, _db ) {
+		if ( typeof _db.getElementsByTagName !== "undefined" ) {
+			return _db.getElementsByTagName( tag );
 
 		// DocumentFragment nodes don't have gEBTN
 		} else {
-			return context.querySelectorAll( tag );
+			return _db.querySelectorAll( tag );
 		}
 	};
 
 	// Class
-	Expr.find.CLASS = function( className, context ) {
-		if ( typeof context.getElementsByClassName !== "undefined" && documentIsHTML ) {
-			return context.getElementsByClassName( className );
+	Expr.find.CLASS = function( className, _db ) {
+		if ( typeof _db.getElementsByClassName !== "undefined" && documentIsHTML ) {
+			return _db.getElementsByClassName( className );
 		}
 	};
 
@@ -1434,17 +1434,17 @@ find.matchesSelector = function( elem, expr ) {
 	return find( expr, document, null, [ elem ] ).length > 0;
 };
 
-find.contains = function( context, elem ) {
+find.contains = function( _db, elem ) {
 
 	// Set document vars if needed
 	// Support: IE 11+, Edge 17 - 18+
 	// IE/Edge sometimes throw a "Permission denied" error when strict-comparing
 	// two documents; shallow comparisons work.
 	// eslint-disable-next-line eqeqeq
-	if ( ( context.ownerDocument || context ) != document ) {
-		setDocument( context );
+	if ( ( _db.ownerDocument || _db ) != document ) {
+		setDocument( _db );
 	}
-	return jQuery.contains( context, elem );
+	return jQuery.contains( _db, elem );
 };
 
 
@@ -1702,7 +1702,7 @@ Expr = jQuery.expr = {
 					return !!elem.parentNode;
 				} :
 
-				function( elem, _context, xml ) {
+				function( elem, __db, xml ) {
 					var cache, outerCache, node, nodeIndex, start,
 						dir = simple !== forward ? "nextSibling" : "previousSibling",
 						parent = elem.parentNode,
@@ -1852,7 +1852,7 @@ Expr = jQuery.expr = {
 				matcher = compile( selector.replace( rtrimCSS, "$1" ) );
 
 			return matcher[ expando ] ?
-				markFunction( function( seed, matches, _context, xml ) {
+				markFunction( function( seed, matches, __db, xml ) {
 					var elem,
 						unmatched = matcher( seed, null, xml, [] ),
 						i = seed.length;
@@ -1864,7 +1864,7 @@ Expr = jQuery.expr = {
 						}
 					}
 				} ) :
-				function( elem, _context, xml ) {
+				function( elem, __db, xml ) {
 					input[ 0 ] = elem;
 					matcher( input, null, xml, results );
 
@@ -2166,17 +2166,17 @@ function addCombinator( matcher, combinator, base ) {
 	return combinator.first ?
 
 		// Check against closest ancestor/preceding element
-		function( elem, context, xml ) {
+		function( elem, _db, xml ) {
 			while ( ( elem = elem[ dir ] ) ) {
 				if ( elem.nodeType === 1 || checkNonElements ) {
-					return matcher( elem, context, xml );
+					return matcher( elem, _db, xml );
 				}
 			}
 			return false;
 		} :
 
 		// Check against all ancestor/preceding elements
-		function( elem, context, xml ) {
+		function( elem, _db, xml ) {
 			var oldCache, outerCache,
 				newCache = [ dirruns, doneName ];
 
@@ -2184,7 +2184,7 @@ function addCombinator( matcher, combinator, base ) {
 			if ( xml ) {
 				while ( ( elem = elem[ dir ] ) ) {
 					if ( elem.nodeType === 1 || checkNonElements ) {
-						if ( matcher( elem, context, xml ) ) {
+						if ( matcher( elem, _db, xml ) ) {
 							return true;
 						}
 					}
@@ -2207,7 +2207,7 @@ function addCombinator( matcher, combinator, base ) {
 							outerCache[ key ] = newCache;
 
 							// A match means we're done; a fail means we have to keep checking
-							if ( ( newCache[ 2 ] = matcher( elem, context, xml ) ) ) {
+							if ( ( newCache[ 2 ] = matcher( elem, _db, xml ) ) ) {
 								return true;
 							}
 						}
@@ -2220,10 +2220,10 @@ function addCombinator( matcher, combinator, base ) {
 
 function elementMatcher( matchers ) {
 	return matchers.length > 1 ?
-		function( elem, context, xml ) {
+		function( elem, _db, xml ) {
 			var i = matchers.length;
 			while ( i-- ) {
-				if ( !matchers[ i ]( elem, context, xml ) ) {
+				if ( !matchers[ i ]( elem, _db, xml ) ) {
 					return false;
 				}
 			}
@@ -2232,16 +2232,16 @@ function elementMatcher( matchers ) {
 		matchers[ 0 ];
 }
 
-function multipleContexts( selector, contexts, results ) {
+function multiple_dbs( selector, _dbs, results ) {
 	var i = 0,
-		len = contexts.length;
+		len = _dbs.length;
 	for ( ; i < len; i++ ) {
-		find( selector, contexts[ i ], results );
+		find( selector, _dbs[ i ], results );
 	}
 	return results;
 }
 
-function condense( unmatched, map, filter, context, xml ) {
+function condense( unmatched, map, filter, _db, xml ) {
 	var elem,
 		newUnmatched = [],
 		i = 0,
@@ -2250,7 +2250,7 @@ function condense( unmatched, map, filter, context, xml ) {
 
 	for ( ; i < len; i++ ) {
 		if ( ( elem = unmatched[ i ] ) ) {
-			if ( !filter || filter( elem, context, xml ) ) {
+			if ( !filter || filter( elem, _db, xml ) ) {
 				newUnmatched.push( elem );
 				if ( mapped ) {
 					map.push( i );
@@ -2269,20 +2269,20 @@ function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postS
 	if ( postFinder && !postFinder[ expando ] ) {
 		postFinder = setMatcher( postFinder, postSelector );
 	}
-	return markFunction( function( seed, results, context, xml ) {
+	return markFunction( function( seed, results, _db, xml ) {
 		var temp, i, elem, matcherOut,
 			preMap = [],
 			postMap = [],
 			preexisting = results.length,
 
-			// Get initial elements from seed or context
+			// Get initial elements from seed or _db
 			elems = seed ||
-				multipleContexts( selector || "*",
-					context.nodeType ? [ context ] : context, [] ),
+				multiple_dbs( selector || "*",
+					_db.nodeType ? [ _db ] : _db, [] ),
 
 			// Prefilter to get matcher input, preserving a map for seed-results synchronization
 			matcherIn = preFilter && ( seed || !selector ) ?
-				condense( elems, preMap, preFilter, context, xml ) :
+				condense( elems, preMap, preFilter, _db, xml ) :
 				elems;
 
 		if ( matcher ) {
@@ -2298,7 +2298,7 @@ function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postS
 				results;
 
 			// Find primary matches
-			matcher( matcherIn, matcherOut, context, xml );
+			matcher( matcherIn, matcherOut, _db, xml );
 		} else {
 			matcherOut = matcherIn;
 		}
@@ -2306,7 +2306,7 @@ function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postS
 		// Apply postFilter
 		if ( postFilter ) {
 			temp = condense( matcherOut, postMap );
-			postFilter( temp, [], context, xml );
+			postFilter( temp, [], _db, xml );
 
 			// Un-match failing elements by moving them back to matcherIn
 			i = temp.length;
@@ -2321,7 +2321,7 @@ function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postS
 			if ( postFinder || preFilter ) {
 				if ( postFinder ) {
 
-					// Get the final matcherOut by condensing this intermediate into postFinder contexts
+					// Get the final matcherOut by condensing this intermediate into postFinder _dbs
 					temp = [];
 					i = matcherOut.length;
 					while ( i-- ) {
@@ -2362,33 +2362,33 @@ function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postS
 }
 
 function matcherFromTokens( tokens ) {
-	var checkContext, matcher, j,
+	var check_db, matcher, j,
 		len = tokens.length,
 		leadingRelative = Expr.relative[ tokens[ 0 ].type ],
 		implicitRelative = leadingRelative || Expr.relative[ " " ],
 		i = leadingRelative ? 1 : 0,
 
-		// The foundational matcher ensures that elements are reachable from top-level context(s)
-		matchContext = addCombinator( function( elem ) {
-			return elem === checkContext;
+		// The foundational matcher ensures that elements are reachable from top-level _db(s)
+		match_db = addCombinator( function( elem ) {
+			return elem === check_db;
 		}, implicitRelative, true ),
-		matchAnyContext = addCombinator( function( elem ) {
-			return indexOf.call( checkContext, elem ) > -1;
+		matchAny_db = addCombinator( function( elem ) {
+			return indexOf.call( check_db, elem ) > -1;
 		}, implicitRelative, true ),
-		matchers = [ function( elem, context, xml ) {
+		matchers = [ function( elem, _db, xml ) {
 
 			// Support: IE 11+, Edge 17 - 18+
 			// IE/Edge sometimes throw a "Permission denied" error when strict-comparing
 			// two documents; shallow comparisons work.
 			// eslint-disable-next-line eqeqeq
-			var ret = ( !leadingRelative && ( xml || context != outermostContext ) ) || (
-				( checkContext = context ).nodeType ?
-					matchContext( elem, context, xml ) :
-					matchAnyContext( elem, context, xml ) );
+			var ret = ( !leadingRelative && ( xml || _db != outermost_db ) ) || (
+				( check_db = _db ).nodeType ?
+					match_db( elem, _db, xml ) :
+					matchAny_db( elem, _db, xml ) );
 
 			// Avoid hanging onto element
 			// (see https://github.com/jquery/sizzle/issues/299)
-			checkContext = null;
+			check_db = null;
 			return ret;
 		} ];
 
@@ -2432,19 +2432,19 @@ function matcherFromTokens( tokens ) {
 function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 	var bySet = setMatchers.length > 0,
 		byElement = elementMatchers.length > 0,
-		superMatcher = function( seed, context, xml, results, outermost ) {
+		superMatcher = function( seed, _db, xml, results, outermost ) {
 			var elem, j, matcher,
 				matchedCount = 0,
 				i = "0",
 				unmatched = seed && [],
 				setMatched = [],
-				contextBackup = outermostContext,
+				_dbBackup = outermost_db,
 
-				// We must always have either seed elements or outermost context
+				// We must always have either seed elements or outermost _db
 				elems = seed || byElement && Expr.find.TAG( "*", outermost ),
 
 				// Use integer dirruns iff this is the outermost matcher
-				dirrunsUnique = ( dirruns += contextBackup == null ? 1 : Math.random() || 0.1 ),
+				dirrunsUnique = ( dirruns += _dbBackup == null ? 1 : Math.random() || 0.1 ),
 				len = elems.length;
 
 			if ( outermost ) {
@@ -2453,7 +2453,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 				// IE/Edge sometimes throw a "Permission denied" error when strict-comparing
 				// two documents; shallow comparisons work.
 				// eslint-disable-next-line eqeqeq
-				outermostContext = context == document || context || outermost;
+				outermost_db = _db == document || _db || outermost;
 			}
 
 			// Add elements passing elementMatchers directly to results
@@ -2468,12 +2468,12 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 					// IE/Edge sometimes throw a "Permission denied" error when strict-comparing
 					// two documents; shallow comparisons work.
 					// eslint-disable-next-line eqeqeq
-					if ( !context && elem.ownerDocument != document ) {
+					if ( !_db && elem.ownerDocument != document ) {
 						setDocument( elem );
 						xml = !documentIsHTML;
 					}
 					while ( ( matcher = elementMatchers[ j++ ] ) ) {
-						if ( matcher( elem, context || document, xml ) ) {
+						if ( matcher( elem, _db || document, xml ) ) {
 							push.call( results, elem );
 							break;
 						}
@@ -2512,7 +2512,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 			if ( bySet && i !== matchedCount ) {
 				j = 0;
 				while ( ( matcher = setMatchers[ j++ ] ) ) {
-					matcher( unmatched, setMatched, context, xml );
+					matcher( unmatched, setMatched, _db, xml );
 				}
 
 				if ( seed ) {
@@ -2544,7 +2544,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 			// Override manipulation of globals by nested matchers
 			if ( outermost ) {
 				dirruns = dirrunsUnique;
-				outermostContext = contextBackup;
+				outermost_db = _dbBackup;
 			}
 
 			return unmatched;
@@ -2592,11 +2592,11 @@ function compile( selector, match /* Internal Use Only */ ) {
  *  selector functions
  * @param {String|Function} selector A selector or a pre-compiled
  *  selector function built with jQuery selector compile
- * @param {Element} context
+ * @param {Element} _db
  * @param {Array} [results]
  * @param {Array} [seed] A set of elements to match against
  */
-function select( selector, context, results, seed ) {
+function select( selector, _db, results, seed ) {
 	var i, tokens, token, type, find,
 		compiled = typeof selector === "function" && selector,
 		match = !seed && tokenize( ( selector = compiled.selector || selector ) );
@@ -2604,31 +2604,31 @@ function select( selector, context, results, seed ) {
 	results = results || [];
 
 	// Try to minimize operations if there is only one selector in the list and no seed
-	// (the latter of which guarantees us context)
+	// (the latter of which guarantees us _db)
 	if ( match.length === 1 ) {
 
-		// Reduce context if the leading compound selector is an ID
+		// Reduce _db if the leading compound selector is an ID
 		tokens = match[ 0 ] = match[ 0 ].slice( 0 );
 		if ( tokens.length > 2 && ( token = tokens[ 0 ] ).type === "ID" &&
-				context.nodeType === 9 && documentIsHTML && Expr.relative[ tokens[ 1 ].type ] ) {
+				_db.nodeType === 9 && documentIsHTML && Expr.relative[ tokens[ 1 ].type ] ) {
 
-			context = ( Expr.find.ID(
+			_db = ( Expr.find.ID(
 				token.matches[ 0 ].replace( runescape, funescape ),
-				context
+				_db
 			) || [] )[ 0 ];
-			if ( !context ) {
+			if ( !_db ) {
 				return results;
 
 			// Precompiled matchers will still verify ancestry, so step up a level
 			} else if ( compiled ) {
-				context = context.parentNode;
+				_db = _db.parentNode;
 			}
 
 			selector = selector.slice( tokens.shift().value.length );
 		}
 
 		// Fetch a seed set for right-to-left matching
-		i = matchExpr.needsContext.test( selector ) ? 0 : tokens.length;
+		i = matchExpr.needs_db.test( selector ) ? 0 : tokens.length;
 		while ( i-- ) {
 			token = tokens[ i ];
 
@@ -2638,11 +2638,11 @@ function select( selector, context, results, seed ) {
 			}
 			if ( ( find = Expr.find[ type ] ) ) {
 
-				// Search, expanding context for leading sibling combinators
+				// Search, expanding _db for leading sibling combinators
 				if ( ( seed = find(
 					token.matches[ 0 ].replace( runescape, funescape ),
 					rsibling.test( tokens[ 0 ].type ) &&
-						testContext( context.parentNode ) || context
+						test_db( _db.parentNode ) || _db
 				) ) ) {
 
 					// If seed is empty or no tokens remain, we can return early
@@ -2663,10 +2663,10 @@ function select( selector, context, results, seed ) {
 	// Provide `match` to avoid retokenization if we modified the selector above
 	( compiled || compile( selector, match ) )(
 		seed,
-		context,
+		_db,
 		!documentIsHTML,
 		results,
-		!context || rsibling.test( selector ) && testContext( context.parentNode ) || context
+		!_db || rsibling.test( selector ) && test_db( _db.parentNode ) || _db
 	);
 	return results;
 }
@@ -2742,7 +2742,7 @@ var siblings = function( n, elem ) {
 };
 
 
-var rneedsContext = jQuery.expr.match.needsContext;
+var rneeds_db = jQuery.expr.match.needs_db;
 
 var rsingleTag = ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i );
 
@@ -2826,7 +2826,7 @@ jQuery.fn.extend( {
 
 			// If this is a positional/relative selector, check membership in the returned set
 			// so $("p:first").is("p:last") won't return true for a doc with two "p".
-			typeof selector === "string" && rneedsContext.test( selector ) ?
+			typeof selector === "string" && rneeds_db.test( selector ) ?
 				jQuery( selector ) :
 				selector || [],
 			false
@@ -2847,7 +2847,7 @@ var rootjQuery,
 	// Shortcut simple #id case for speed
 	rquickExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]+))$/,
 
-	init = jQuery.fn.init = function( selector, context, root ) {
+	init = jQuery.fn.init = function( selector, _db, root ) {
 		var match, elem;
 
 		// HANDLE: $(""), $(null), $(undefined), $(false)
@@ -2872,32 +2872,32 @@ var rootjQuery,
 				match = rquickExpr.exec( selector );
 			}
 
-			// Match html or make sure no context is specified for #id
-			if ( match && ( match[ 1 ] || !context ) ) {
+			// Match html or make sure no _db is specified for #id
+			if ( match && ( match[ 1 ] || !_db ) ) {
 
 				// HANDLE: $(html) -> $(array)
 				if ( match[ 1 ] ) {
-					context = context instanceof jQuery ? context[ 0 ] : context;
+					_db = _db instanceof jQuery ? _db[ 0 ] : _db;
 
 					// Option to run scripts is true for back-compat
 					// Intentionally let the error be thrown if parseHTML is not present
 					jQuery.merge( this, jQuery.parseHTML(
 						match[ 1 ],
-						context && context.nodeType ? context.ownerDocument || context : document,
+						_db && _db.nodeType ? _db.ownerDocument || _db : document,
 						true
 					) );
 
 					// HANDLE: $(html, props)
-					if ( rsingleTag.test( match[ 1 ] ) && jQuery.isPlainObject( context ) ) {
-						for ( match in context ) {
+					if ( rsingleTag.test( match[ 1 ] ) && jQuery.isPlainObject( _db ) ) {
+						for ( match in _db ) {
 
-							// Properties of context are called as methods if possible
+							// Properties of _db are called as methods if possible
 							if ( isFunction( this[ match ] ) ) {
-								this[ match ]( context[ match ] );
+								this[ match ]( _db[ match ] );
 
 							// ...and otherwise set as attributes
 							} else {
-								this.attr( match, context[ match ] );
+								this.attr( match, _db[ match ] );
 							}
 						}
 					}
@@ -2918,13 +2918,13 @@ var rootjQuery,
 				}
 
 			// HANDLE: $(expr, $(...))
-			} else if ( !context || context.jquery ) {
-				return ( context || root ).find( selector );
+			} else if ( !_db || _db.jquery ) {
+				return ( _db || root ).find( selector );
 
-			// HANDLE: $(expr, context)
-			// (which is just equivalent to: $(context).find(expr)
+			// HANDLE: $(expr, _db)
+			// (which is just equivalent to: $(_db).find(expr)
 			} else {
-				return this.constructor( context ).find( selector );
+				return this.constructor( _db ).find( selector );
 			}
 
 		// HANDLE: $(DOMElement)
@@ -2978,17 +2978,17 @@ jQuery.fn.extend( {
 		} );
 	},
 
-	closest: function( selectors, context ) {
+	closest: function( selectors, _db ) {
 		var cur,
 			i = 0,
 			l = this.length,
 			matched = [],
 			targets = typeof selectors !== "string" && jQuery( selectors );
 
-		// Positional selectors never match, since there's no _selection_ context
-		if ( !rneedsContext.test( selectors ) ) {
+		// Positional selectors never match, since there's no _selection_ _db
+		if ( !rneeds_db.test( selectors ) ) {
 			for ( ; i < l; i++ ) {
-				for ( cur = this[ i ]; cur && cur !== context; cur = cur.parentNode ) {
+				for ( cur = this[ i ]; cur && cur !== _db; cur = cur.parentNode ) {
 
 					// Always skip document fragments
 					if ( cur.nodeType < 11 && ( targets ?
@@ -3029,10 +3029,10 @@ jQuery.fn.extend( {
 		);
 	},
 
-	add: function( selector, context ) {
+	add: function( selector, _db ) {
 		return this.pushStack(
 			jQuery.uniqueSort(
-				jQuery.merge( this.get(), jQuery( selector, context ) )
+				jQuery.merge( this.get(), jQuery( selector, _db ) )
 			)
 		);
 	},
@@ -3333,11 +3333,11 @@ jQuery.Callbacks = function( options ) {
 				return !!locked;
 			},
 
-			// Call all callbacks with the given context and arguments
-			fireWith: function( context, args ) {
+			// Call all callbacks with the given _db and arguments
+			fireWith: function( _db, args ) {
 				if ( !locked ) {
 					args = args || [];
-					args = [ context, args.slice ? args.slice() : args ];
+					args = [ _db, args.slice ? args.slice() : args ];
 					queue.push( args );
 					if ( !firing ) {
 						fire();
@@ -3397,7 +3397,7 @@ function adoptValue( value, resolve, reject, noValue ) {
 	} catch ( value ) {
 
 		// Support: Android 4.0 only
-		// Strict mode functions invoked without .call/.apply get global-object context
+		// Strict mode functions invoked without .call/.apply get global-object _db
 		reject.apply( undefined, [ value ] );
 	}
 }
@@ -3526,7 +3526,7 @@ jQuery.extend( {
 									// Handle all other returned values
 									} else {
 
-										// Only substitute handlers pass on context
+										// Only substitute handlers pass on _db
 										// and multiple values (non-spec behavior)
 										if ( handler !== Identity ) {
 											that = undefined;
@@ -3557,7 +3557,7 @@ jQuery.extend( {
 											// Ignore post-resolution exceptions
 											if ( depth + 1 >= maxDepth ) {
 
-												// Only substitute handlers pass on context
+												// Only substitute handlers pass on _db
 												// and multiple values (non-spec behavior)
 												if ( handler !== Thrower ) {
 													that = undefined;
@@ -3718,7 +3718,7 @@ jQuery.extend( {
 			i = remaining,
 
 			// subordinate fulfillment data
-			resolveContexts = Array( i ),
+			resolve_dbs = Array( i ),
 			resolveValues = slice.call( arguments ),
 
 			// the primary Deferred
@@ -3727,10 +3727,10 @@ jQuery.extend( {
 			// subordinate callback factory
 			updateFunc = function( i ) {
 				return function( value ) {
-					resolveContexts[ i ] = this;
+					resolve_dbs[ i ] = this;
 					resolveValues[ i ] = arguments.length > 1 ? slice.call( arguments ) : value;
 					if ( !( --remaining ) ) {
-						primary.resolveWith( resolveContexts, resolveValues );
+						primary.resolveWith( resolve_dbs, resolveValues );
 					}
 				};
 			};
@@ -4686,24 +4686,24 @@ if ( !support.option ) {
 }
 
 
-function getAll( context, tag ) {
+function getAll( _db, tag ) {
 
 	// Support: IE <=9 - 11 only
 	// Use typeof to avoid zero-argument method invocation on host objects (trac-15151)
 	var ret;
 
-	if ( typeof context.getElementsByTagName !== "undefined" ) {
-		ret = context.getElementsByTagName( tag || "*" );
+	if ( typeof _db.getElementsByTagName !== "undefined" ) {
+		ret = _db.getElementsByTagName( tag || "*" );
 
-	} else if ( typeof context.querySelectorAll !== "undefined" ) {
-		ret = context.querySelectorAll( tag || "*" );
+	} else if ( typeof _db.querySelectorAll !== "undefined" ) {
+		ret = _db.querySelectorAll( tag || "*" );
 
 	} else {
 		ret = [];
 	}
 
-	if ( tag === undefined || tag && nodeName( context, tag ) ) {
-		return jQuery.merge( [ context ], ret );
+	if ( tag === undefined || tag && nodeName( _db, tag ) ) {
+		return jQuery.merge( [ _db ], ret );
 	}
 
 	return ret;
@@ -4727,9 +4727,9 @@ function setGlobalEval( elems, refElements ) {
 
 var rhtml = /<|&#?\w+;/;
 
-function buildFragment( elems, context, scripts, selection, ignored ) {
+function buildFragment( elems, _db, scripts, selection, ignored ) {
 	var elem, tmp, tag, wrap, attached, j,
-		fragment = context.createDocumentFragment(),
+		fragment = _db.createDocumentFragment(),
 		nodes = [],
 		i = 0,
 		l = elems.length;
@@ -4748,11 +4748,11 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 
 			// Convert non-html into a text node
 			} else if ( !rhtml.test( elem ) ) {
-				nodes.push( context.createTextNode( elem ) );
+				nodes.push( _db.createTextNode( elem ) );
 
 			// Convert html into DOM nodes
 			} else {
-				tmp = tmp || fragment.appendChild( context.createElement( "div" ) );
+				tmp = tmp || fragment.appendChild( _db.createElement( "div" ) );
 
 				// Deserialize a standard representation
 				tag = ( rtagName.exec( elem ) || [ "", "" ] )[ 1 ].toLowerCase();
@@ -4784,7 +4784,7 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 	i = 0;
 	while ( ( elem = nodes[ i++ ] ) ) {
 
-		// Skip elements already in the context collection (trac-4087)
+		// Skip elements already in the _db collection (trac-4087)
 		if ( selection && jQuery.inArray( elem, selection ) > -1 ) {
 			if ( ignored ) {
 				ignored.push( elem );
@@ -4970,7 +4970,7 @@ jQuery.event = {
 				handler: handler,
 				guid: handler.guid,
 				selector: selector,
-				needsContext: selector && jQuery.expr.match.needsContext.test( selector ),
+				needs_db: selector && jQuery.expr.match.needs_db.test( selector ),
 				namespace: namespaces.join( "." )
 			}, handleObjIn );
 
@@ -5186,7 +5186,7 @@ jQuery.event = {
 						sel = handleObj.selector + " ";
 
 						if ( matchedSelectors[ sel ] === undefined ) {
-							matchedSelectors[ sel ] = handleObj.needsContext ?
+							matchedSelectors[ sel ] = handleObj.needs_db ?
 								jQuery( sel, this ).index( cur ) > -1 :
 								jQuery.find( sel, this, null, [ cur ] ).length;
 						}
@@ -6177,7 +6177,7 @@ jQuery.fn.extend( {
 	replaceWith: function() {
 		var ignored = [];
 
-		// Make the changes, replacing each non-ignored context element with the new content
+		// Make the changes, replacing each non-ignored _db element with the new content
 		return domManip( this, arguments, function( elem ) {
 			var parent = this.parentNode;
 
@@ -9175,7 +9175,7 @@ jQuery.extend( {
 		// deep extended (see ajaxExtend)
 		flatOptions: {
 			url: true,
-			context: true
+			_db: true
 		}
 	},
 
@@ -9237,13 +9237,13 @@ jQuery.extend( {
 			// Create the final options object
 			s = jQuery.ajaxSetup( {}, options ),
 
-			// Callbacks context
-			callbackContext = s.context || s,
+			// Callbacks _db
+			callback_db = s._db || s,
 
-			// Context for global events is callbackContext if it is a DOM node or jQuery collection
-			globalEventContext = s.context &&
-				( callbackContext.nodeType || callbackContext.jquery ) ?
-				jQuery( callbackContext ) :
+			// _db for global events is callback_db if it is a DOM node or jQuery collection
+			globalEvent_db = s._db &&
+				( callback_db.nodeType || callback_db.jquery ) ?
+				jQuery( callback_db ) :
 				jQuery.event,
 
 			// Deferreds
@@ -9466,7 +9466,7 @@ jQuery.extend( {
 
 		// Allow custom headers/mimetypes and early abort
 		if ( s.beforeSend &&
-			( s.beforeSend.call( callbackContext, jqXHR, s ) === false || completed ) ) {
+			( s.beforeSend.call( callback_db, jqXHR, s ) === false || completed ) ) {
 
 			// Abort if not done already and return
 			return jqXHR.abort();
@@ -9491,7 +9491,7 @@ jQuery.extend( {
 
 			// Send global event
 			if ( fireGlobals ) {
-				globalEventContext.trigger( "ajaxSend", [ jqXHR, s ] );
+				globalEvent_db.trigger( "ajaxSend", [ jqXHR, s ] );
 			}
 
 			// If request was aborted inside ajaxSend, stop there
@@ -9614,9 +9614,9 @@ jQuery.extend( {
 
 			// Success/Error
 			if ( isSuccess ) {
-				deferred.resolveWith( callbackContext, [ success, statusText, jqXHR ] );
+				deferred.resolveWith( callback_db, [ success, statusText, jqXHR ] );
 			} else {
-				deferred.rejectWith( callbackContext, [ jqXHR, statusText, error ] );
+				deferred.rejectWith( callback_db, [ jqXHR, statusText, error ] );
 			}
 
 			// Status-dependent callbacks
@@ -9624,15 +9624,15 @@ jQuery.extend( {
 			statusCode = undefined;
 
 			if ( fireGlobals ) {
-				globalEventContext.trigger( isSuccess ? "ajaxSuccess" : "ajaxError",
+				globalEvent_db.trigger( isSuccess ? "ajaxSuccess" : "ajaxError",
 					[ jqXHR, s, isSuccess ? success : error ] );
 			}
 
 			// Complete
-			completeDeferred.fireWith( callbackContext, [ jqXHR, statusText ] );
+			completeDeferred.fireWith( callback_db, [ jqXHR, statusText ] );
 
 			if ( fireGlobals ) {
-				globalEventContext.trigger( "ajaxComplete", [ jqXHR, s ] );
+				globalEvent_db.trigger( "ajaxComplete", [ jqXHR, s ] );
 
 				// Handle the global AJAX counter
 				if ( !( --jQuery.active ) ) {
@@ -10125,35 +10125,35 @@ support.createHTMLDocument = ( function() {
 
 
 // Argument "data" should be string of html
-// context (optional): If specified, the fragment will be created in this context,
+// _db (optional): If specified, the fragment will be created in this _db,
 // defaults to document
 // keepScripts (optional): If true, will include scripts passed in the html string
-jQuery.parseHTML = function( data, context, keepScripts ) {
+jQuery.parseHTML = function( data, _db, keepScripts ) {
 	if ( typeof data !== "string" ) {
 		return [];
 	}
-	if ( typeof context === "boolean" ) {
-		keepScripts = context;
-		context = false;
+	if ( typeof _db === "boolean" ) {
+		keepScripts = _db;
+		_db = false;
 	}
 
 	var base, parsed, scripts;
 
-	if ( !context ) {
+	if ( !_db ) {
 
 		// Stop scripts or inline event handlers from being executed immediately
 		// by using document.implementation
 		if ( support.createHTMLDocument ) {
-			context = document.implementation.createHTMLDocument( "" );
+			_db = document.implementation.createHTMLDocument( "" );
 
 			// Set the base href for the created document
 			// so any parsed elements with URLs
 			// are based on the document's URL (gh-2965)
-			base = context.createElement( "base" );
+			base = _db.createElement( "base" );
 			base.href = document.location.href;
-			context.head.appendChild( base );
+			_db.head.appendChild( base );
 		} else {
-			context = document;
+			_db = document;
 		}
 	}
 
@@ -10162,10 +10162,10 @@ jQuery.parseHTML = function( data, context, keepScripts ) {
 
 	// Single tag
 	if ( parsed ) {
-		return [ context.createElement( parsed[ 1 ] ) ];
+		return [ _db.createElement( parsed[ 1 ] ) ];
 	}
 
-	parsed = buildFragment( [ data ], context, scripts );
+	parsed = buildFragment( [ data ], _db, scripts );
 
 	if ( scripts && scripts.length ) {
 		jQuery( scripts ).remove();
@@ -10557,7 +10557,7 @@ jQuery.fn.extend( {
 jQuery.each(
 	( "blur focus focusin focusout resize scroll click dblclick " +
 	"mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave " +
-	"change select submit keydown keypress keyup contextmenu" ).split( " " ),
+	"change select submit keydown keypress keyup _dbmenu" ).split( " " ),
 	function( _i, name ) {
 
 		// Handle event binding
@@ -10578,16 +10578,16 @@ jQuery.each(
 // to avoid O(N^2) behavior when the engine would try matching "\s+$" at each space position.
 var rtrim = /^[\s\uFEFF\xA0]+|([^\s\uFEFF\xA0])[\s\uFEFF\xA0]+$/g;
 
-// Bind a function to a context, optionally partially applying any
+// Bind a function to a _db, optionally partially applying any
 // arguments.
 // jQuery.proxy is deprecated to promote standards (specifically Function#bind)
 // However, it is not slated for removal any time soon
-jQuery.proxy = function( fn, context ) {
+jQuery.proxy = function( fn, _db ) {
 	var tmp, args, proxy;
 
-	if ( typeof context === "string" ) {
-		tmp = fn[ context ];
-		context = fn;
+	if ( typeof _db === "string" ) {
+		tmp = fn[ _db ];
+		_db = fn;
 		fn = tmp;
 	}
 
@@ -10600,7 +10600,7 @@ jQuery.proxy = function( fn, context ) {
 	// Simulated bind
 	args = slice.call( arguments, 2 );
 	proxy = function() {
-		return fn.apply( context || this, args.concat( slice.call( arguments ) ) );
+		return fn.apply( _db || this, args.concat( slice.call( arguments ) ) );
 	};
 
 	// Set the guid of unique handler to the same of original handler, so it can be removed

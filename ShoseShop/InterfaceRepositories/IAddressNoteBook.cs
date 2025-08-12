@@ -9,7 +9,7 @@ namespace ShoseShop.InterfaceRepositories
 {
     public interface IAddressNoteBook
     {
-         List<Tinh> GetTinhs();
+         List<Tinh> GetTinhList();
          List<Quan> GetQuanList(int provinces);
          List<Phuong> GetPhuongList(int districts);
          List<SoDiaChi> GetAllAddressNote();
@@ -19,7 +19,7 @@ namespace ShoseShop.InterfaceRepositories
          List<SoDiaChi> GetAllAddressNoteById(int masdc);
 
         void AddAddressNote(int proviceId, int districtId, int wardId, string address, int makh, string tennguoinhan, string sdt);
-         SoDiaChi GetSodiachi(int masodiachi);
+         SoDiaChi GetSoDiaChi(int maSoDiaChi);
          int GetMaTinh(string TenTinh);
          int GetMaQuan(string TenQuan);
          int GetMaPhuong(string TenPhuong);

@@ -412,26 +412,26 @@ window.Modernizr = (function( window, document, undefined ) {
         return testPropsAll('boxDirection');
     };
 
-    // On the S60 and BB Storm, getContext exists, but always returns undefined
-    // so we actually have to call getContext() to verify
+    // On the S60 and BB Storm, get_db exists, but always returns undefined
+    // so we actually have to call get_db() to verify
     // github.com/Modernizr/Modernizr/issues/issue/97/
 
     tests['canvas'] = function() {
         var elem = document.createElement('canvas');
-        return !!(elem.getContext && elem.getContext('2d'));
+        return !!(elem.get_db && elem.get_db('2d'));
     };
 
     tests['canvastext'] = function() {
-        return !!(Modernizr['canvas'] && is(document.createElement('canvas').getContext('2d').fillText, 'function'));
+        return !!(Modernizr['canvas'] && is(document.createElement('canvas').get_db('2d').fillText, 'function'));
     };
 
     // webk.it/70117 is tracking a legit WebGL feature detect proposal
 
     // We do a soft detect which may false positive in order to avoid
-    // an expensive context creation: bugzil.la/732441
+    // an expensive _db creation: bugzil.la/732441
 
     tests['webgl'] = function() {
-        return !!window.WebGLRenderingContext;
+        return !!window.WebGLRendering_db;
     };
 
     /*
@@ -1109,7 +1109,7 @@ window.Modernizr = (function( window, document, undefined ) {
          * returns a shived element for the given nodeName and document
          * @memberOf html5
          * @param {String} nodeName name of the element
-         * @param {Document} ownerDocument The context document.
+         * @param {Document} ownerDocument The _db document.
          * @returns {Object} The shived element.
          */
         function createElement(nodeName, ownerDocument, data){
@@ -1145,7 +1145,7 @@ window.Modernizr = (function( window, document, undefined ) {
         /**
          * returns a shived DocumentFragment for the given document
          * @memberOf html5
-         * @param {Document} ownerDocument The context document.
+         * @param {Document} ownerDocument The _db document.
          * @returns {Object} The shived DocumentFragment.
          */
         function createDocumentFragment(ownerDocument, data){

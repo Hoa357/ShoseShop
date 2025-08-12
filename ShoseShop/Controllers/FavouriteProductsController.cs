@@ -1,5 +1,8 @@
 ﻿using Newtonsoft.Json;
+using ShoesStore.Repositories;
+using ShoseShop.Data;
 using ShoseShop.InterfaceRepositories;
+using ShoseShop.Repositories;
 using ShoseShop.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -26,7 +29,19 @@ namespace ShoseShop.Controllers
                 this.kmRepo = kmRepo;
             }
 
-            public ActionResult ViewFavouriteProducts()
+            
+            public FavouriteProductsController()
+            {
+                var db = new ShoesContext(); // Tạo DbContext
+                _sanphamct = new ChiTietSanphamRepo(db); 
+                _product = new SanphamRepo(db);
+                _size = new SizeRepo(db);
+                _tkho = new SanphamSizeRepo(db);
+                _mau = new MauRepo(db);
+                this.kmRepo = new KhuyenMaiRepo(db);
+            }
+
+        public ActionResult ViewFavouriteProducts()
             {
          
             var favouriteItems = new List<FavouriteProductsItem>();

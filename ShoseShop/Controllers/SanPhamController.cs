@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
+using ShoesStore.Repositories;
 using ShoseShop.Data;
 using ShoseShop.InterfaceRepositories;
+using ShoseShop.Repositories;
 using ShoseShop.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -12,19 +14,22 @@ namespace ShoseShop.Controllers
 {
     public class SanPhamController : Controller
     {
-        
-            IBinhLuan blRepo;
+
+            ShoesContext _db;
+            IBinhLuan blRepo; 
             ISanPham dongspRepo; IChiTietSanPham spctRepo; IMau mauRepo; IKhachHang khRepo;
-            public SanPhamController(ShoesDbContext context, ISanPham dongspRepo, IChiTietSanPham spctRepo, IMau m,
-               IKhachHang khRepo, IBinhLuan blRepo)
+            public SanPhamController()
             {
-                this.dongspRepo = dongspRepo;
-                this.spctRepo = spctRepo;
-                this.mauRepo = m;
-                this.khRepo = khRepo;
-                this.blRepo = blRepo;
+                // Khởi tạo DbContext
+                _db = new ShoesContext();
+
+                blRepo = new BinhLuanRepository(_db);
+                dongspRepo = new SanphamRepo(_db);
+                spctRepo = new ChiTietSanphamRepo(_db);
+                mauRepo = new MauRepo(_db);
+                khRepo = new KhachhangRepo(_db);
             }
-            public ActionResult SanPhamTheoLoai(string searchString, string maMau, int? sortGia, decimal? minPrice, decimal? maxPrice, int maLoai)
+        public ActionResult SanPhamTheoLoai(string searchString, int maMau, int? sortGia, decimal? minPrice, decimal? maxPrice, int maLoai)
             {
                 CreateData();
 
@@ -50,18 +55,22 @@ namespace ShoseShop.Controllers
 
             }
 
-        
 
-            public ActionResult HienThiSanpham(int madongsanpham, int maspct)
-            {
-                SanphamViewModel pDetail = spctRepo.HienThiSanpham(madongsanpham, maspct);
+
+        public ActionResult HienThiSanpham1(int maSanPham, int maspct)
+        {
+            ChiTietSanphamViewModel pDetail = spctRepo.HienThiSanpham(maSanPham, maspct);
             Session["Masp"] = maspct;
             ViewBag.masp = maspct;
 
-                return View(pDetail);
-            }
+            return View(pDetail);
+        }
 
-            public void CreateData()
+
+
+
+
+        public void CreateData()
             {
                 List<SelectListItem> MauList = mauRepo.GetMauList().Select(x => new SelectListItem
                 {
@@ -79,8 +88,7 @@ namespace ShoseShop.Controllers
                     return RedirectToAction("Login", "Account");
                 }
 
-            // Lấy mã sản phẩm từ session
-            // Lấy mã sản phẩm từ session
+           
              int Masp = (Session["Masp"] as int?) ?? 0;
             
         
@@ -95,12 +103,10 @@ namespace ShoseShop.Controllers
                     return HttpNotFound();
                 }
 
-                // Lấy mã khách hàng
+               
                 int makh = user.MaKhachHang;
 
-                // Kiểm tra độ dài của bình luận
-
-                // Tạo đối tượng Binhluan từ thông tin đã lấy được
+                
                 BinhLuan objComment = new BinhLuan
                 {
                     MaSP = Masp,
@@ -123,6 +129,27 @@ namespace ShoseShop.Controllers
 
                 return PartialView("PartialShowComment", cmtView);
             }
+
+
+        public ActionResult ShowComment(int masp, int? page) 
+        {
+            int pageNumber = page ?? 1;
+
+            
+            CommentViewModel cmtView = blRepo.GetBlList(masp, pageNumber);
+
+            return View(cmtView);
         }
+
+
+        public ActionResult LoaiSP()
+        {
+            IEnumerable<Loai> l1 = _db.Loais.ToList();
+          
+
+            return PartialView("LoaiSP", l1);
+        }
+
+    }
     }
 

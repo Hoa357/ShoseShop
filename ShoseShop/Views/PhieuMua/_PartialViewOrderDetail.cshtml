@@ -1,0 +1,106 @@
+﻿@using ShoseShop.ViewModel
+@model PhieuMuaViewModel
+
+<style>
+    #selectTinh, #selectQuan, #selectPhuong {
+        display: block !important;
+        color: #777777;
+        border: 1px solid #ced4da;
+    }
+
+    .nice-select {
+        display: none !important;
+    }
+</style>
+
+<div class="col-md-6 form-group p_star">
+    @Html.LabelFor(m => m.HoTen, new { @class = "form-label" })
+    @Html.TextBoxFor(m => m.HoTen, new { @class = "form-control", placeholder = "Tên khách hàng", id = "HoTenInput" })
+    @Html.ValidationMessageFor(m => m.HoTen, "", new { @class = "text-danger" })
+</div>
+
+<div class="col-md-6 form-group p_star">
+    @Html.LabelFor(m => m.Sdt, new { @class = "form-label" })
+    @Html.TextBoxFor(m => m.Sdt, new { @class = "form-control", placeholder = "Số điện thoại", type = "number", id = "SdtInput" })
+    @Html.ValidationMessageFor(m => m.Sdt, "", new { @class = "text-danger" })
+</div>
+
+<div class="col-md-12 form-group p_star">
+    @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email", type = "email", id = "EmailInput", @readonly = "readonly" })
+    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+</div>
+
+<div class="col-md-12 form-group p_star">
+    @Html.LabelFor(m => m.Diachi, new { @class = "form-label" })
+    @Html.TextBoxFor(m => m.Diachi, new { @class = "form-control", placeholder = "Địa chỉ", id = "DiachiInput" })
+    @Html.ValidationMessageFor(m => m.Diachi, "", new { @class = "text-danger" })
+</div>
+
+<div class="col-md-12 form-group p_star">
+    <div class="row">
+        <div class="col-md-4">
+            @Html.DropDownListFor(m => m.maTinh, (IEnumerable<SelectListItem>)ViewBag.TinhSelect, "Chọn tỉnh", new { @class = "form-select", id = "selectTinh" })
+            @Html.ValidationMessageFor(m => m.maTinh, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-4">
+            @Html.DropDownListFor(m => m.maQuan, (IEnumerable<SelectListItem>)ViewBag.QuanSelect ?? new List<SelectListItem>(), "Chọn Quận/Huyện", new { @class = "form-select", id = "selectQuan" })
+            @Html.ValidationMessageFor(m => m.maQuan, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-4">
+            @Html.DropDownListFor(m => m.maPhuong, (IEnumerable<SelectListItem>)ViewBag.PhuongSelect ?? new List<SelectListItem>(), "Chọn xã/phường", new { @class = "form-select", id = "selectPhuong" })
+            @Html.ValidationMessageFor(m => m.maPhuong, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var emailVar = '@Model.Email';
+        if (emailVar == "") {
+            $('#EmailInput').removeAttr("readonly");
+        }
+
+        $('#selectTinh').change(function () {
+            var maTinhView = $(this).val();
+            $.ajax({
+                url: '@Url.Action("GetDistinctsByProvince", "PhieuMua")',
+                type: 'GET',
+                data: { provinceId: maTinhView },
+                success: function (response) {
+                    var selectQuan = $('#selectQuan');
+                    var selectWard = $('#selectPhuong');
+
+                    selectQuan.empty().append('<option value="">Chọn huyện</option>');
+                    selectWard.empty().append('<option value="">Chọn phường/xã</option>');
+
+                    $.each(response, function (index, item) {
+                        selectQuan.append($('<option>', {
+                            value: item.value,
+                            text: item.text
+                        }));
+                    });
+                }
+            });
+        });
+
+        $('#selectQuan').change(function () {
+            var maQuanView = $(this).val();
+            $.ajax({
+                url: '@Url.Action("GetWardByDistrict", "PhieuMua")',
+                type: 'GET',
+                data: { districtId: maQuanView },
+                success: function (response) {
+                    var selectWard = $('#selectPhuong');
+                    selectWard.empty().append('<option value="">Chọn phường/xã</option>');
+                    $.each(response, function (index, item) {
+                        selectWard.append($('<option>', {
+                            value: item.value,
+                            text: item.text
+                        }));
+                    });
+                }
+            });
+        });
+    });
+</script>

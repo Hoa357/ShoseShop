@@ -393,7 +393,7 @@ $.extend( $.validator, {
 
 		init: function() {
 			this.labelContainer = $( this.settings.errorLabelContainer );
-			this.errorContext = this.labelContainer.length && this.labelContainer || $( this.currentForm );
+			this.error_db = this.labelContainer.length && this.labelContainer || $( this.currentForm );
 			this.containers = $( this.settings.errorContainer ).add( this.settings.errorLabelContainer );
 			this.submitted = {};
 			this.valueCache = {};
@@ -689,7 +689,7 @@ $.extend( $.validator, {
 
 		errors: function() {
 			var errorClass = this.settings.errorClass.split( " " ).join( "." );
-			return $( this.settings.errorElement + "." + errorClass, this.errorContext );
+			return $( this.settings.errorElement + "." + errorClass, this.error_db );
 		},
 
 		resetInternals: function() {
@@ -1591,7 +1591,7 @@ $.extend( $.validator, {
 				port: "validate" + element.name,
 				dataType: "json",
 				data: data,
-				context: validator.currentForm,
+				_db: validator.currentForm,
 				success: function( response ) {
 					var valid = response === true || response === "true",
 						errors, message, submitted;

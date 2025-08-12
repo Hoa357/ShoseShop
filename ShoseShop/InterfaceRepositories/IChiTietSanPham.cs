@@ -11,7 +11,7 @@ namespace ShoseShop.InterfaceRepositories
     public interface IChiTietSanPham
     {
         ChiTietSanPham Getsanphamct(int maspct);
-        SanphamViewModel HienThiSanpham(int madongsanpham, int masp);
+        ChiTietSanphamViewModel HienThiSanpham(int maSanPham, int maspct);
         List<SanPhamHomeViewModel> HomeSanPham(int trangthai);
         FavouriteProductsItem GetFavProById(int id);
     

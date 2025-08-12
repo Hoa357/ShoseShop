@@ -1,0 +1,334 @@
+﻿@using ShoseShop.ViewModel
+@model List<SanphamViewModel>
+
+<style>
+    /* CSS của bạn giữ nguyên, không cần thay đổi */
+    .product-card_sale {
+        position: relative;
+        flex: 0 0 auto;
+        width: 250px;
+        height: 375px;
+        margin-right: 20px;
+    }
+
+    .product-image_sale {
+        width: 100%;
+        height: 250px;
+        overflow: hidden;
+    }
+
+        .product-image_sale img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .view-details-btn {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: none;
+    }
+
+    .product-card_sale:hover .view-details-btn {
+        display: block;
+    }
+
+    .text-top-right_sale {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: green;
+    }
+
+    #prevBtn_sale, #nextBtn_sale {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+    }
+
+    #prevBtn_sale {
+        left: 10px;
+    }
+
+    #nextBtn_sale {
+        right: 10px;
+    }
+
+    #productSlider_sale {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .product-info_sale {
+        margin-bottom: 10px;
+    }
+
+    .product-details_sale {
+        opacity: 1;
+        transition: opacity 0.8s ease-in;
+    }
+
+    .product-images_sale_inside {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: left;
+        align-items: flex-start;
+    }
+
+        .product-images_sale_inside img {
+            max-width: 50px;
+            max-height: 50px;
+            margin: 5px;
+        }
+
+            .product-images_sale_inside img:hover {
+                transform: scale(1.1);
+                cursor: pointer;
+            }
+
+    .product-details_sale.lost {
+        display: none;
+        opacity: 0;
+    }
+
+    .product-images_sale_inside.hidden {
+        display: none;
+    }
+
+    .square-box {
+        width: 100%;
+        padding-top: 100%;
+        position: relative;
+        background-color: #FF8E31;
+        text-align: center;
+        margin: 10px 0px;
+        border-radius: 3px;
+    }
+
+    .countdown-number {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 18px;
+        font-weight: bold;
+        color: #FFFFFF;
+    }
+
+    .countdown-label {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        font-size: 12px;
+        font-weight: bold;
+        color: #FFFFFF;
+    }
+</style>
+
+@if (Model != null && Model.Any())
+{
+   
+        // Lấy ngày kết thúc an toàn từ ViewBag
+        string formattedString = "";
+        if (ViewBag.Ngaykt != null && ViewBag.Ngaykt is DateTime)
+        {
+            formattedString = ((DateTime)ViewBag.Ngaykt).ToString("yyyy-MM-ddTHH:mm:ss");
+        }
+    
+    <script>
+        function showProductDetails(element) {
+            var productDetails = element.querySelector('.product-details_sale');
+            productDetails.classList.toggle('lost');
+            console.log("In here");
+            var productImages = element.querySelector('.product-images_sale_inside');
+            productImages.classList.toggle('hidden');
+            var img = element.querySelectorAll('img');
+
+            var productCardHeights = document.querySelectorAll('.product-card_sale');
+            productCardHeights.forEach(function (productCardHeight) {
+                if (productImages.classList.contains('hidden')) {
+                    productCardHeight.style.height = '375px';
+                } else {
+                    var count = Math.round(img.length / 4);
+                    var height = 375 + (50 * count);
+                    console.log("Height: " + height);
+                    productCardHeight.style.height = height + 'px';
+                }
+            });
+        }
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const productSlider_sale = document.getElementById('productSlider_sale');
+            const prevBtn_sale = document.getElementById('prevBtn_sale');
+            const nextBtn_sale = document.getElementById('nextBtn_sale');
+
+            let scrollPosition_sale = 0;
+            let manualScroll_sale = false;
+            let isSliding = false;
+
+            const nextSlide_sale = () => {
+                if (!isSliding && scrollPosition_sale < productSlider_sale.scrollWidth - productSlider_sale.clientWidth) {
+                    isSliding = true;
+                    scrollPosition_sale += productSlider_sale.clientWidth;
+                    productSlider_sale.scroll({
+                        left: scrollPosition_sale,
+                        behavior: 'smooth'
+                    });
+                }
+            };
+
+            prevBtn_sale.addEventListener('click', () => {
+                if (!isSliding && scrollPosition_sale > 0) {
+                    isSliding = true;
+                    scrollPosition_sale -= productSlider_sale.clientWidth;
+                    productSlider_sale.scroll({
+                        left: scrollPosition_sale,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+
+            nextBtn_sale.addEventListener('click', () => {
+                nextSlide_sale();
+            });
+
+            setInterval(() => {
+                if (!manualScroll_sale && !isSliding) {
+                    nextSlide_sale();
+                }
+            }, 5000);
+
+            productSlider_sale.addEventListener('scroll', () => {
+                scrollPosition_sale = productSlider_sale.scrollLeft;
+                manualScroll_sale = true;
+                setTimeout(() => {
+                    manualScroll_sale = false;
+                }, 100);
+            });
+
+            productSlider_sale.addEventListener('transitionend', () => {
+                isSliding = false;
+            });
+
+            // Adjust position of buttons on hover
+            const adjustButtonPosition = () => {
+                prevBtn_sale.style.top = `${prevBtn_sale.offsetTop}px`;
+                prevBtn_sale.style.left = `${prevBtn_sale.offsetLeft}px`;
+                nextBtn_sale.style.top = `${nextBtn_sale.offsetTop}px`;
+                nextBtn_sale.style.left = `${nextBtn_sale.offsetLeft}px`;
+            };
+
+            productSlider_sale.addEventListener('mouseenter', adjustButtonPosition);
+
+            // Restore button position when not hovered
+            productSlider_sale.addEventListener('mouseleave', () => {
+                prevBtn_sale.style.top = '';
+                prevBtn_sale.style.left = '';
+                nextBtn_sale.style.top = '';
+                nextBtn_sale.style.left = '';
+            });
+        });
+
+        // Countdown Timer Script
+        (function() {
+            var formattedDate = "@Html.Raw(formattedString)";
+            if (formattedDate === "") return;
+
+            var countDownDate = new Date(formattedDate).getTime();
+            var countdownContainer = document.getElementById("countdown_container");
+
+            var x = setInterval(function () {
+                var now = new Date().getTime();
+                var distance = countDownDate - now;
+
+                if (distance < 0) {
+                    clearInterval(x);
+                    if (countdownContainer) {
+                        countdownContainer.innerHTML = "<h4 class='text-center text-danger' style='width:100%'>ĐÃ HẾT HẠN</h4>";
+                    }
+                    return;
+                }
+
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("days_component").innerText = days;
+                document.getElementById("hours_component").innerText = hours;
+                document.getElementById("minutes_component").innerText = minutes;
+                document.getElementById("seconds_component").innerText = seconds;
+            }, 1000);
+        })();
+    </script>
+
+    <div class="container">
+        <h2 class="text-center">SIÊU KHUYẾN MẠI</h2>
+        <div class="row justify-content-md-center" id="countdown_container">
+            <div class="col-sm-1"><div class="square-box"><p id="days_component" class="countdown-number">00</p><span class="countdown-label">Ngày</span></div></div>
+            <div class="col-sm-1"><div class="square-box"><p id="hours_component" class="countdown-number">00</p><span class="countdown-label">Giờ</span></div></div>
+            <div class="col-sm-1"><div class="square-box"><p id="minutes_component" class="countdown-number">00</p><span class="countdown-label">Phút</span></div></div>
+            <div class="col-sm-1"><div class="square-box"><p id="seconds_component" class="countdown-number">00</p><span class="countdown-label">Giây</span></div></div>
+        </div>
+    </div>
+
+    <section class="container position-relative mt-2 mb-2">
+        <div id="productSlider_sale" class="row flex-row flex-nowrap overflow-auto">
+            @foreach (var dongspView in Model)
+            {
+                if (dongspView.sanphams != null && dongspView.sanphams.ChiTietSanPhams != null && dongspView.sanphams.ChiTietSanPhams.Any())
+                {
+                    <div class="product-card_sale" onmouseenter="showProductDetails(this)" onmouseleave="showProductDetails(this)">
+                        <div class="product-image_sale">
+                            <a href="@Url.Action("HienThiSanpham", "SanPham", new { masp = dongspView.sanphams.ChiTietSanPhams.First().MaChiTietSP, madongsanpham = dongspView.sanphams.MaSanPham })">
+                                <img src="@Url.Content("~/img/" + dongspView.sanphams.MaSanPham + "/" + dongspView.sanphams.ChiTietSanPhams.First().AnhDaiDien)" alt="Product Image" />
+                                <h5 class="text-top-right_sale"><strong>-@dongspView.Phantramgiam%</strong></h5>
+                            </a>
+                        </div>
+                        <div class="product-info_sale mt-2">
+                            <div class="product-details_sale">
+                                <h5>@dongspView.sanphams.TenSanPham</h5>
+                                <h6 style="color:#6c757d">@dongspView.sanphams.ChiTietSanPhams.Count() màu</h6>
+                            </div>
+                            <div class="product-images_sale_inside row hidden" style="margin-left:auto">
+                                @foreach (var sp in dongspView.sanphams.ChiTietSanPhams)
+                                {
+                                    <a href="@Url.Action("HienThiSanpham", "SanPham", new { madongsanpham = sp.MaSP, masp = sp.MaChiTietSP })">
+                                        <img src="@Url.Content("~/img/" + dongspView.sanphams.MaSanPham + "/" + sp.AnhDaiDien)" alt="@dongspView.sanphams.TenSanPham">
+                                    </a>
+                                }
+                            </div>
+                            <div class="price_sale">
+                                @{
+                                    decimal? originalPrice = dongspView.sanphams.GiaSanPham;
+                                    decimal? priceSale = originalPrice - (originalPrice * dongspView.Phantramgiam / 100);
+                                }
+                                <h5>
+                                    @(priceSale?.ToString("#,##0"))₫ &nbsp;
+                                    <span style="text-decoration:line-through;color:#cccccc">@originalPrice?.ToString("#,##0")₫</span>
+                                </h5>
+                                <h5 style="color:green;">@dongspView.Phantramgiam% off</h5>
+                            </div>
+                        </div>
+                        @Html.ActionLink("Xem chi tiết", "HienThiSanpham", "SanPham",
+                                      new { masp = dongspView.sanphams.ChiTietSanPhams.First().MaChiTietSP, madongsanpham = dongspView.sanphams.MaSanPham },
+                                      new { @class = "btn btn-primary view-details-btn" })
+                    </div>
+                }
+            }
+        </div>
+        <button class="btn btn-primary" id="prevBtn_sale"><i class="bi bi-chevron-left"></i></button>
+        <button class="btn btn-primary" id="nextBtn_sale"><i class="bi bi-chevron-right"></i></button>
+    </section>
+}
+else
+{
+    <div class="container text-center py-5">
+        <p>Hiện không có chương trình khuyến mãi nào.</p>
+    </div>
+}

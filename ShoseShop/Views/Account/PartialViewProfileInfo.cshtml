@@ -1,0 +1,71 @@
+﻿@model ShoseShop.Data.KhachHang
+
+
+@if (Model != null)
+{
+    <div class="mb-4">
+        <div class="row">
+            <div class="col-6">
+                <h3 class="mb-4">Thông tin tài khoản</h3>
+            </div>
+            <div class="d-flex justify-content-end col-6">
+                <h3 style="border: none; margin: 0; padding-bottom: 0; font-size: 16px;">
+                    <strong style="color:#2F5ACF">
+                        <i class="bi bi-coin"></i>
+                   
+                        <span id="coinWelcomeNum">@Model.TongXu?.ToString("#,##0") Shoes Xu</span>
+                    </strong>
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Tên đăng nhập</p>
+            </div>
+            <div class="col-sm-9">
+                <p class="text-muted mb-0">@Model.TenKhachHang</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+            </div>
+            <div class="col-sm-9">
+                <p class="text-muted mb-0">@Model.Email</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Số điện thoại</p>
+            </div>
+            <div class="col-sm-9">
+                <p class="text-muted mb-0">@Model.Phone</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Giới tính</p>
+            </div>
+            <div class="col-sm-9">
+                <p class="text-muted mb-0">@(Model.GioiTinh == true ? "Nam" : "Nữ")</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Ngày sinh</p>
+            </div>
+            <div class="col-sm-9">
+                @* Đoạn code này của bạn đã được viết rất tốt và an toàn! *@
+                <p class="text-muted mb-0">@(Model.NgaySinh != null ? Model.NgaySinh.ToString("dd/MM/yyyy") : "Chưa cập nhật")</p>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <p class="text-danger">Không thể tải thông tin người dùng.</p>
+}

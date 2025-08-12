@@ -344,7 +344,7 @@
     mouseenter: 'mouseover',
     mouseleave: 'mouseout'
   };
-  const nativeEvents = new Set(['click', 'dblclick', 'mouseup', 'mousedown', 'contextmenu', 'mousewheel', 'DOMMouseScroll', 'mouseover', 'mouseout', 'mousemove', 'selectstart', 'selectend', 'keydown', 'keypress', 'keyup', 'orientationchange', 'touchstart', 'touchmove', 'touchend', 'touchcancel', 'pointerdown', 'pointermove', 'pointerup', 'pointerleave', 'pointercancel', 'gesturestart', 'gesturechange', 'gestureend', 'focus', 'blur', 'change', 'reset', 'select', 'submit', 'focusin', 'focusout', 'load', 'unload', 'beforeunload', 'resize', 'move', 'DOMContentLoaded', 'readystatechange', 'error', 'abort', 'scroll']);
+  const nativeEvents = new Set(['click', 'dblclick', 'mouseup', 'mousedown', '_dbmenu', 'mousewheel', 'DOMMouseScroll', 'mouseover', 'mouseout', 'mousemove', 'selectstart', 'selectend', 'keydown', 'keypress', 'keyup', 'orientationchange', 'touchstart', 'touchmove', 'touchend', 'touchcancel', 'pointerdown', 'pointermove', 'pointerup', 'pointerleave', 'pointercancel', 'gesturestart', 'gesturechange', 'gestureend', 'focus', 'blur', 'change', 'reset', 'select', 'submit', 'focusin', 'focusout', 'load', 'unload', 'beforeunload', 'resize', 'move', 'DOMContentLoaded', 'readystatechange', 'error', 'abort', 'scroll']);
   /**
    * Private methods
    */
@@ -2938,17 +2938,17 @@
         boundary = _options$boundary === void 0 ? clippingParents : _options$boundary,
         _options$rootBoundary = _options.rootBoundary,
         rootBoundary = _options$rootBoundary === void 0 ? viewport : _options$rootBoundary,
-        _options$elementConte = _options.elementContext,
-        elementContext = _options$elementConte === void 0 ? popper : _options$elementConte,
+        _options$elementConte = _options.element_db,
+        element_db = _options$elementConte === void 0 ? popper : _options$elementConte,
         _options$altBoundary = _options.altBoundary,
         altBoundary = _options$altBoundary === void 0 ? false : _options$altBoundary,
         _options$padding = _options.padding,
         padding = _options$padding === void 0 ? 0 : _options$padding;
     var paddingObject = mergePaddingObject(typeof padding !== 'number' ? padding : expandToHashMap(padding, basePlacements));
-    var altContext = elementContext === popper ? reference : popper;
+    var alt_db = element_db === popper ? reference : popper;
     var popperRect = state.rects.popper;
-    var element = state.elements[altBoundary ? altContext : elementContext];
-    var clippingClientRect = getClippingRect(isElement(element) ? element : element.contextElement || getDocumentElement(state.elements.popper), boundary, rootBoundary, strategy);
+    var element = state.elements[altBoundary ? alt_db : element_db];
+    var clippingClientRect = getClippingRect(isElement(element) ? element : element._dbElement || getDocumentElement(state.elements.popper), boundary, rootBoundary, strategy);
     var referenceClientRect = getBoundingClientRect(state.elements.reference);
     var popperOffsets = computeOffsets({
       reference: referenceClientRect,
@@ -2957,7 +2957,7 @@
       placement: placement
     });
     var popperClientRect = rectToClientRect(Object.assign({}, popperRect, popperOffsets));
-    var elementClientRect = elementContext === popper ? popperClientRect : referenceClientRect; // positive = overflowing the clipping rect
+    var elementClientRect = element_db === popper ? popperClientRect : referenceClientRect; // positive = overflowing the clipping rect
     // 0 or negative = within the clipping rect
 
     var overflowOffsets = {
@@ -2968,7 +2968,7 @@
     };
     var offsetData = state.modifiersData.offset; // Offsets can be applied only to the popper element
 
-    if (elementContext === popper && offsetData) {
+    if (element_db === popper && offsetData) {
       var offset = offsetData[placement];
       Object.keys(overflowOffsets).forEach(function (key) {
         var multiply = [right, bottom].indexOf(key) >= 0 ? 1 : -1;
@@ -3189,7 +3189,7 @@
     var popperRect = state.rects.popper;
     var preventedOffsets = state.modifiersData.preventOverflow;
     var referenceOverflow = detectOverflow(state, {
-      elementContext: 'reference'
+      element_db: 'reference'
     });
     var popperAltOverflow = detectOverflow(state, {
       altBoundary: true
@@ -3621,7 +3621,7 @@
           cleanupModifierEffects();
           state.options = Object.assign({}, defaultOptions, state.options, options);
           state.scrollParents = {
-            reference: isElement(reference) ? listScrollParents(reference) : reference.contextElement ? listScrollParents(reference.contextElement) : [],
+            reference: isElement(reference) ? listScrollParents(reference) : reference._dbElement ? listScrollParents(reference._dbElement) : [],
             popper: listScrollParents(popper)
           }; // Orders the modifiers based on their dependencies and `phase`
           // properties
@@ -4159,33 +4159,33 @@
       const openToggles = SelectorEngine.find(SELECTOR_DATA_TOGGLE_SHOWN);
 
       for (const toggle of openToggles) {
-        const context = Dropdown.getInstance(toggle);
+        const _db = Dropdown.getInstance(toggle);
 
-        if (!context || context._config.autoClose === false) {
+        if (!_db || _db._config.autoClose === false) {
           continue;
         }
 
         const composedPath = event.composedPath();
-        const isMenuTarget = composedPath.includes(context._menu);
+        const isMenuTarget = composedPath.includes(_db._menu);
 
-        if (composedPath.includes(context._element) || context._config.autoClose === 'inside' && !isMenuTarget || context._config.autoClose === 'outside' && isMenuTarget) {
+        if (composedPath.includes(_db._element) || _db._config.autoClose === 'inside' && !isMenuTarget || _db._config.autoClose === 'outside' && isMenuTarget) {
           continue;
         } // Tab navigation through the dropdown menu or events from contained inputs shouldn't close the menu
 
 
-        if (context._menu.contains(event.target) && (event.type === 'keyup' && event.key === TAB_KEY$1 || /input|select|option|textarea|form/i.test(event.target.tagName))) {
+        if (_db._menu.contains(event.target) && (event.type === 'keyup' && event.key === TAB_KEY$1 || /input|select|option|textarea|form/i.test(event.target.tagName))) {
           continue;
         }
 
         const relatedTarget = {
-          relatedTarget: context._element
+          relatedTarget: _db._element
         };
 
         if (event.type === 'click') {
           relatedTarget.clickEvent = event;
         }
 
-        context._completeHide(relatedTarget);
+        _db._completeHide(relatedTarget);
       }
     }
 
@@ -5956,26 +5956,26 @@
       for (const trigger of triggers) {
         if (trigger === 'click') {
           EventHandler.on(this._element, this.constructor.eventName(EVENT_CLICK$1), this._config.selector, event => {
-            const context = this._initializeOnDelegatedTarget(event);
+            const _db = this._initializeOnDelegatedTarget(event);
 
-            context.toggle();
+            _db.toggle();
           });
         } else if (trigger !== TRIGGER_MANUAL) {
           const eventIn = trigger === TRIGGER_HOVER ? this.constructor.eventName(EVENT_MOUSEENTER) : this.constructor.eventName(EVENT_FOCUSIN$1);
           const eventOut = trigger === TRIGGER_HOVER ? this.constructor.eventName(EVENT_MOUSELEAVE) : this.constructor.eventName(EVENT_FOCUSOUT$1);
           EventHandler.on(this._element, eventIn, this._config.selector, event => {
-            const context = this._initializeOnDelegatedTarget(event);
+            const _db = this._initializeOnDelegatedTarget(event);
 
-            context._activeTrigger[event.type === 'focusin' ? TRIGGER_FOCUS : TRIGGER_HOVER] = true;
+            _db._activeTrigger[event.type === 'focusin' ? TRIGGER_FOCUS : TRIGGER_HOVER] = true;
 
-            context._enter();
+            _db._enter();
           });
           EventHandler.on(this._element, eventOut, this._config.selector, event => {
-            const context = this._initializeOnDelegatedTarget(event);
+            const _db = this._initializeOnDelegatedTarget(event);
 
-            context._activeTrigger[event.type === 'focusout' ? TRIGGER_FOCUS : TRIGGER_HOVER] = context._element.contains(event.relatedTarget);
+            _db._activeTrigger[event.type === 'focusout' ? TRIGGER_FOCUS : TRIGGER_HOVER] = _db._element.contains(event.relatedTarget);
 
-            context._leave();
+            _db._leave();
           });
         }
       }

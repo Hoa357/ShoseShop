@@ -1,1 +1,69 @@
 ﻿
+@model List<ShoseShop.ViewModel.SanphamViewModel>
+@if (Model == null || Model.Count == 0)
+{
+    <div style="display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 100%">
+        ShoesShop chưa có giày này
+    </div>
+
+}
+@foreach (ShoseShop.ViewModel.SanphamViewModel sanphamsView in Model)
+{
+
+    <div class="col-lg-4 col-md-6">
+        @if (sanphamsView.sanphams.ChiTietSanPhams == null || !sanphamsView.sanphams.ChiTietSanPhams.Any())
+        {
+            <h5>
+                ShoesShop chưa có giày này
+            </h5>
+            continue;
+        }
+    
+
+        <a href="@Url.Action("HienThiSanpham", "SanPham", new { masp = sanphamsView.sanphams.ChiTietSanPhams.ElementAt(0).MaSP, madongsanpham = sanphamsView.sanphams.MaSanPham })">
+            <img class="img-fluid" src="~/img/@sanphamsView.sanphams.ChiTietSanPhams/@sanphamsView.sanphams.ChiTietSanPhams.ElementAt(0).AnhDaiDien" alt="">
+            
+        </a>
+
+        <div class="product-details">
+            <h5>@sanphamsView.sanphams.TenSanPham</h5>
+            <h6 style="color:#6c757d">@sanphamsView.sanphams.ChiTietSanPhams.Count() Colors</h6>
+        </div>
+        <div class="product-images row hidden" style="margin-left:auto">
+            @if (sanphamsView.sanphams.ChiTietSanPhams == null || sanphamsView.sanphams.ChiTietSanPhams.Count == 0)
+            {
+                <h5>
+                    ShoesShop chưa có giày này
+                </h5>
+            }
+            @foreach (ShoseShop.Data.ChiTietSanPham sp in sanphamsView.sanphams.ChiTietSanPhams)
+            {
+               <a href="@Url.Action("HienThiSanpham", "SanPham", new { madongsanpham = sp.MaSP, masp = sp.MaSP })">
+                   <img src="@Url.Content("~/img/" + sp.MaSP + "/" + sp.AnhDaiDien)" alt="@sanphamsView.sanphams.TenSanPham">
+               </a>
+            }
+        </div>
+        <div class="price">
+            @if (sanphamsView.Phantramgiam != null && sanphamsView.Phantramgiam != 0)
+            {
+                decimal? priceSale = sanphamsView.sanphams.GiaSanPham - (sanphamsView.sanphams.GiaSanPham * sanphamsView.Phantramgiam / 100);
+                <h5>
+                    @(priceSale.Value.ToString("#,##0"))₫ &nbsp;<span style="text-decoration:line-through;color:#cccccc">
+                        @sanphamsView.sanphams.GiaSanPham.ToString("#,##0")₫
+                    </span>
+                </h5>
+                <h5 style="color:green;">@sanphamsView.Phantramgiam% off</h5>
+            }
+            else
+            {
+                <h5>@sanphamsView.sanphams.GiaSanPham.ToString("#,##0")₫</h5>
+            }
+
+        </div>
+    </div>
+    
+}

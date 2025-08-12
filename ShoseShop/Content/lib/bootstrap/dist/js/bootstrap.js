@@ -365,7 +365,7 @@
     mouseleave: 'mouseout'
   };
   const customEventsRegex = /^(mouseenter|mouseleave)/i;
-  const nativeEvents = new Set(['click', 'dblclick', 'mouseup', 'mousedown', 'contextmenu', 'mousewheel', 'DOMMouseScroll', 'mouseover', 'mouseout', 'mousemove', 'selectstart', 'selectend', 'keydown', 'keypress', 'keyup', 'orientationchange', 'touchstart', 'touchmove', 'touchend', 'touchcancel', 'pointerdown', 'pointermove', 'pointerup', 'pointerleave', 'pointercancel', 'gesturestart', 'gesturechange', 'gestureend', 'focus', 'blur', 'change', 'reset', 'select', 'submit', 'focusin', 'focusout', 'load', 'unload', 'beforeunload', 'resize', 'move', 'DOMContentLoaded', 'readystatechange', 'error', 'abort', 'scroll']);
+  const nativeEvents = new Set(['click', 'dblclick', 'mouseup', 'mousedown', '_dbmenu', 'mousewheel', 'DOMMouseScroll', 'mouseover', 'mouseout', 'mousemove', 'selectstart', 'selectend', 'keydown', 'keypress', 'keyup', 'orientationchange', 'touchstart', 'touchmove', 'touchend', 'touchcancel', 'pointerdown', 'pointermove', 'pointerup', 'pointerleave', 'pointercancel', 'gesturestart', 'gesturechange', 'gestureend', 'focus', 'blur', 'change', 'reset', 'select', 'submit', 'focusin', 'focusout', 'load', 'unload', 'beforeunload', 'resize', 'move', 'DOMContentLoaded', 'readystatechange', 'error', 'abort', 'scroll']);
   /**
    * ------------------------------------------------------------------------
    * Private methods
@@ -2293,30 +2293,30 @@
       const toggles = SelectorEngine.find(SELECTOR_DATA_TOGGLE$3);
 
       for (let i = 0, len = toggles.length; i < len; i++) {
-        const context = Dropdown.getInstance(toggles[i]);
+        const _db = Dropdown.getInstance(toggles[i]);
 
-        if (!context || context._config.autoClose === false) {
+        if (!_db || _db._config.autoClose === false) {
           continue;
         }
 
-        if (!context._isShown()) {
+        if (!_db._isShown()) {
           continue;
         }
 
         const relatedTarget = {
-          relatedTarget: context._element
+          relatedTarget: _db._element
         };
 
         if (event) {
           const composedPath = event.composedPath();
-          const isMenuTarget = composedPath.includes(context._menu);
+          const isMenuTarget = composedPath.includes(_db._menu);
 
-          if (composedPath.includes(context._element) || context._config.autoClose === 'inside' && !isMenuTarget || context._config.autoClose === 'outside' && isMenuTarget) {
+          if (composedPath.includes(_db._element) || _db._config.autoClose === 'inside' && !isMenuTarget || _db._config.autoClose === 'outside' && isMenuTarget) {
             continue;
           } // Tab navigation through the dropdown menu or events from contained inputs shouldn't close the menu
 
 
-          if (context._menu.contains(event.target) && (event.type === 'keyup' && event.key === TAB_KEY$1 || /input|select|option|textarea|form/i.test(event.target.tagName))) {
+          if (_db._menu.contains(event.target) && (event.type === 'keyup' && event.key === TAB_KEY$1 || /input|select|option|textarea|form/i.test(event.target.tagName))) {
             continue;
           }
 
@@ -2325,7 +2325,7 @@
           }
         }
 
-        context._completeHide(relatedTarget);
+        _db._completeHide(relatedTarget);
       }
     }
 
@@ -3675,14 +3675,14 @@
       }
 
       if (event) {
-        const context = this._initializeOnDelegatedTarget(event);
+        const _db = this._initializeOnDelegatedTarget(event);
 
-        context._activeTrigger.click = !context._activeTrigger.click;
+        _db._activeTrigger.click = !_db._activeTrigger.click;
 
-        if (context._isWithActiveTrigger()) {
-          context._enter(null, context);
+        if (_db._isWithActiveTrigger()) {
+          _db._enter(null, _db);
         } else {
-          context._leave(null, context);
+          _db._leave(null, _db);
         }
       } else {
         if (this.getTipElement().classList.contains(CLASS_NAME_SHOW$2)) {
@@ -3935,8 +3935,8 @@
     } // Private
 
 
-    _initializeOnDelegatedTarget(event, context) {
-      return context || this.constructor.getOrCreateInstance(event.delegateTarget, this._getDelegateConfig());
+    _initializeOnDelegatedTarget(event, _db) {
+      return _db || this.constructor.getOrCreateInstance(event.delegateTarget, this._getDelegateConfig());
     }
 
     _getOffset() {
@@ -4055,57 +4055,57 @@
       }
     }
 
-    _enter(event, context) {
-      context = this._initializeOnDelegatedTarget(event, context);
+    _enter(event, _db) {
+      _db = this._initializeOnDelegatedTarget(event, _db);
 
       if (event) {
-        context._activeTrigger[event.type === 'focusin' ? TRIGGER_FOCUS : TRIGGER_HOVER] = true;
+        _db._activeTrigger[event.type === 'focusin' ? TRIGGER_FOCUS : TRIGGER_HOVER] = true;
       }
 
-      if (context.getTipElement().classList.contains(CLASS_NAME_SHOW$2) || context._hoverState === HOVER_STATE_SHOW) {
-        context._hoverState = HOVER_STATE_SHOW;
+      if (_db.getTipElement().classList.contains(CLASS_NAME_SHOW$2) || _db._hoverState === HOVER_STATE_SHOW) {
+        _db._hoverState = HOVER_STATE_SHOW;
         return;
       }
 
-      clearTimeout(context._timeout);
-      context._hoverState = HOVER_STATE_SHOW;
+      clearTimeout(_db._timeout);
+      _db._hoverState = HOVER_STATE_SHOW;
 
-      if (!context._config.delay || !context._config.delay.show) {
-        context.show();
+      if (!_db._config.delay || !_db._config.delay.show) {
+        _db.show();
         return;
       }
 
-      context._timeout = setTimeout(() => {
-        if (context._hoverState === HOVER_STATE_SHOW) {
-          context.show();
+      _db._timeout = setTimeout(() => {
+        if (_db._hoverState === HOVER_STATE_SHOW) {
+          _db.show();
         }
-      }, context._config.delay.show);
+      }, _db._config.delay.show);
     }
 
-    _leave(event, context) {
-      context = this._initializeOnDelegatedTarget(event, context);
+    _leave(event, _db) {
+      _db = this._initializeOnDelegatedTarget(event, _db);
 
       if (event) {
-        context._activeTrigger[event.type === 'focusout' ? TRIGGER_FOCUS : TRIGGER_HOVER] = context._element.contains(event.relatedTarget);
+        _db._activeTrigger[event.type === 'focusout' ? TRIGGER_FOCUS : TRIGGER_HOVER] = _db._element.contains(event.relatedTarget);
       }
 
-      if (context._isWithActiveTrigger()) {
+      if (_db._isWithActiveTrigger()) {
         return;
       }
 
-      clearTimeout(context._timeout);
-      context._hoverState = HOVER_STATE_OUT;
+      clearTimeout(_db._timeout);
+      _db._hoverState = HOVER_STATE_OUT;
 
-      if (!context._config.delay || !context._config.delay.hide) {
-        context.hide();
+      if (!_db._config.delay || !_db._config.delay.hide) {
+        _db.hide();
         return;
       }
 
-      context._timeout = setTimeout(() => {
-        if (context._hoverState === HOVER_STATE_OUT) {
-          context.hide();
+      _db._timeout = setTimeout(() => {
+        if (_db._hoverState === HOVER_STATE_OUT) {
+          _db.hide();
         }
-      }, context._config.delay.hide);
+      }, _db._config.delay.hide);
     }
 
     _isWithActiveTrigger() {

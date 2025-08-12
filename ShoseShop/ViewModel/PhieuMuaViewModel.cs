@@ -42,7 +42,7 @@ namespace ShoseShop.ViewModel
 
         //[Required(ErrorMessage = "Vui lòng chọn địa chỉ nhận hàng")]
         //[MinLength(1, ErrorMessage = "Phải có ít nhất một địa chỉ nhận hàng")]
-        public List<SoDiaChi> sodiachis { get; set; }
+        public List<SoDiaChi> SoDiaChis { get; set; }
 
         //[Required(ErrorMessage = "Vui lòng chọn voucher")]
         //[MinLength(1, ErrorMessage = "Phải có ít nhất một voucher")]

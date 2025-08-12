@@ -15,7 +15,6 @@ namespace ShoseShop.Data
         [Index]
         public string TenLoai { get; set; }
 
-        public int MaSanPham { get; set; } // Mã sản phẩm liên kết với loại
         public virtual ICollection<SanPham> SanPhams { get; set; } = new List<SanPham>();
 
 

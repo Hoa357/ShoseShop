@@ -340,7 +340,7 @@ $.extend($.validator, {
 		
 		init: function() {
 			this.labelContainer = $(this.settings.errorLabelContainer);
-			this.errorContext = this.labelContainer.length && this.labelContainer || $(this.currentForm);
+			this.error_db = this.labelContainer.length && this.labelContainer || $(this.currentForm);
 			this.containers = $(this.settings.errorContainer).add( this.settings.errorLabelContainer );
 			this.submitted = {};
 			this.valueCache = {};
@@ -553,7 +553,7 @@ $.extend($.validator, {
 		},
 		
 		errors: function() {
-			return $( this.settings.errorElement + "." + this.settings.errorClass, this.errorContext );
+			return $( this.settings.errorElement + "." + this.settings.errorClass, this.error_db );
 		},
 		
 		reset: function() {

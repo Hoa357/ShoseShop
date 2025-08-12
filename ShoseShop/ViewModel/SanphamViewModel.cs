@@ -10,7 +10,7 @@ namespace ShoseShop.ViewModel
     public class SanphamViewModel
     {
       
-        public SanPham sanpham { get; set; }
+        public SanPham sanphams { get; set; }
         public int Phantramgiam { get; set; }
 
 

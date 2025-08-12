@@ -10,7 +10,7 @@ namespace ShoseShop.InterfaceRepositories
     public interface IKhuyenMai
     {
         DateTime getNgayktKmToday();
-        List<KhuyenMai> GetAllKhuyenMaiToday(string searchString, string maMau, int? sortGia, decimal? minPrice, decimal? maxPrice, int Phantramgiam);
+        List<KhuyenMai> GetAllKhuyenMaiToday(string searchString, int maMau, int? sortGia, decimal? minPrice, decimal? maxPrice, int Phantramgiam);
         int GetKmProductToday(SanPham sp);
     
 }

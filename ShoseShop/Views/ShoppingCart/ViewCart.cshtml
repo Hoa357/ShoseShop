@@ -1,0 +1,44 @@
+﻿@using ShoseShop.ViewModel
+@model List<ShoppingCartItem>
+
+@{
+    ViewBag.Title = "Cart Page";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<style>
+    .imageProduct {
+        max-height: 164x;
+        max-width: 164px;
+    }
+</style>
+
+<!-- End Header Area -->
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Giỏ hàng</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="@Url.Action("Index", "Home")">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="#">Giỏ hàng</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+<!--================Cart Area =================-->
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div id="partialCart">
+               
+                @{ Html.RenderPartial("PartialCartList", Model); }
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

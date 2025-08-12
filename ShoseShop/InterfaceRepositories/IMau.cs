@@ -9,7 +9,7 @@ namespace ShoseShop.InterfaceRepositories
 {
     public interface IMau
     {
-        Mau GetMau(string mamau);
+        Mau GetMau(int mamau);
         List<Mau> GetMauList();
     }
 }

@@ -87,8 +87,8 @@ namespace ShoseShop.Controllers
                     Email = kh?.Email ?? "",
                     Mapttt = 0,
                     voucherList = voucherRepo.getAllVoucherToday(),
-                    //  sodiachis = addressRepo.GetAllAddressNoteByMaKH(kh.Makh),
-                    sodiachis = kh != null ? addressRepo.GetAllAddressNoteByMaKH(kh.MaKhachHang) : addressRepo.GetAllAddressNote(),
+                    //  SoDiaChis = addressRepo.GetAllAddressNoteByMaKH(kh.Makh),
+                    SoDiaChis = kh != null ? addressRepo.GetAllAddressNoteByMaKH(kh.MaKhachHang) : addressRepo.GetAllAddressNote(),
                     totalCost = total,
                     tempCost = total,
                     Choosenvoucher = null,
@@ -192,7 +192,7 @@ namespace ShoseShop.Controllers
                     Mapttt = 0,
                     voucherList = voucherList,
                     Choosenvoucher = string.IsNullOrEmpty(mavoucher) ? null : voucher,
-                    sodiachis = addressRepo.GetAllAddressNote(),
+                    SoDiaChis = addressRepo.GetAllAddressNote(),
                     totalCost = total,
                     tempCost = tempCost,
                     coinGet = coin,
@@ -262,7 +262,7 @@ namespace ShoseShop.Controllers
                 }
 
                 // Gán các thông tin khác
-                phieuMua.sodiachis = addressRepo.GetAllAddressNote();
+                phieuMua.SoDiaChis = addressRepo.GetAllAddressNote();
                 phieuMua.voucherList = voucherRepo.getAllVoucherToday();
                 ViewBag.xuTemp = phieuMua.coinChoosen;
                 ViewBag.AmountApply = phieuMua.coinApply;
@@ -313,7 +313,7 @@ namespace ShoseShop.Controllers
             {
 
                 PhieuMuaViewModel pm = new PhieuMuaViewModel();
-                List<Tinh> tinhList = addressRepo.GetTinhs();
+                List<Tinh> tinhList = addressRepo.GetTinhList();
                 List<SelectListItem> selectTinh = tinhList.Select(x => new SelectListItem
                 {
                     Value = x.Matinh.ToString(),
@@ -325,7 +325,7 @@ namespace ShoseShop.Controllers
                 KhachHang kh = khRepo.GetCurrentKh("truongmyhoa561@gmail.com");
                 pm.khInfo = kh;
 
-                pm.sodiachis = addressRepo.GetAllAddressNote();
+                pm.SoDiaChis = addressRepo.GetAllAddressNote();
 
                 return View(pm);
             }
@@ -365,7 +365,7 @@ namespace ShoseShop.Controllers
 
             public void CreateSelectAddress()
             {
-                List<Tinh> tinhs = addressRepo.GetTinhs();
+                List<Tinh> tinhs = addressRepo.GetTinhList();
                 List<SelectListItem> selectTinh = tinhs.Select(x => new SelectListItem
                 {
                     Value = x.Matinh.ToString(),
@@ -379,12 +379,12 @@ namespace ShoseShop.Controllers
             public ActionResult UpdateAddress(int masdc)
             {
 
-                SoDiaChi sdc = addressRepo.GetSodiachi(masdc);
+                SoDiaChi sdc = addressRepo.GetSoDiaChi(masdc);
                 int maTinh = addressRepo.GetMaTinh(sdc.DiaChi.Split(',')[1].TrimStart());
                 int maQuan = addressRepo.GetMaQuan(sdc.DiaChi.Split(',')[2].TrimStart());
                 int maPhuong = addressRepo.GetMaPhuong(sdc.DiaChi.Split(',')[3].TrimStart());
 
-                List<Tinh> tinhs = addressRepo.GetTinhs();
+                List<Tinh> tinhs = addressRepo.GetTinhList();
                 List<SelectListItem> selectTinh = tinhs.Select(x => new SelectListItem
                 {
                     Value = x.Matinh.ToString(),
@@ -423,7 +423,9 @@ namespace ShoseShop.Controllers
                 return Json(addView);
             }
 
-            public ActionResult UpdateAddressFinal(int masdc, string hoten, string sdt, string diachi, int matinh, int maquan, int maphuong)
+     
+
+        public ActionResult UpdateAddressFinal(int masdc, string hoten, string sdt, string diachi, int matinh, int maquan, int maphuong)
             {
                 addressRepo.UpdateSDC(masdc, hoten, sdt, diachi, matinh, maquan, maphuong);
                 List<SoDiaChi> sdcList = addressRepo.GetAllAddressNote();
@@ -469,9 +471,9 @@ namespace ShoseShop.Controllers
                 return check;
             }
 
-            public ActionResult ChangeAddressPhieuMua(int masodiachi)
+            public ActionResult ChangeAddressPhieuMua(int maSoDiaChi)
             {
-                SoDiaChi sdc = addressRepo.GetSodiachi(masodiachi);
+                SoDiaChi sdc = addressRepo.GetSoDiaChi(maSoDiaChi);
                 string emailkh = (Session["Email"] )as string  ?? "";
                 KhachHang kh = khRepo.GetCurrentKh(emailkh);
 

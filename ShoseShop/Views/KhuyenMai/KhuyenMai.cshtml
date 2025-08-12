@@ -1,0 +1,24 @@
+﻿@model List<ShoseShop.Data.KhuyenMai>
+
+<li class="nav-item submenu dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+       aria-expanded="false">Khuyến mại</a>
+    <ul class="dropdown-menu">
+        <li class="nav-item">
+            
+            @Html.ActionLink("Tất cả", "SaleIndex", "KhuyenMai", new { phantramgiam = -1 }, new { @class = "nav-link" })
+        </li>
+
+        
+        @if (Model != null)
+        {
+            foreach (var km in Model)
+            {
+                <li class="nav-item">
+                   
+                    @Html.ActionLink(km.PhanTramGiam + "%", "SaleIndex", "KhuyenMai", new { phantramgiam = km.PhanTramGiam }, new { @class = "nav-link", style = "font-size:14px" })
+                </li>
+            }
+        }
+    </ul>
+</li>

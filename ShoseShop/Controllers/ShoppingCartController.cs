@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
+using ShoesStore.Repositories;
 using ShoseShop.Data;
 using ShoseShop.InterfaceRepositories;
+using ShoseShop.Repositories;
 using ShoseShop.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -31,45 +33,8 @@ namespace ShoseShop.Controllers
                 this.kmRepo = kmRepo;
                 //_vnPayService = vnPayService;
             }
-
-
-            //[System.Web.Mvc.HttpPost]
-            //public IActionResult CreatePaymentUrlVnpay(PaymentInformationModel model)
-            //{
-            //    var url = _vnPayService.CreatePaymentUrl(model, HttpContext);
-
-            //    return Json(url);
-            //}
-
-            //[HttpGet]
-            //public IActionResult VnPaySuccess([FromQuery] PaymentResponseModel response)
-            //{
-
-
-            //    return View("VnPaySuccess", response);
-            //}
-
-            //[HttpGet]
-            //public IActionResult PaymentCallbackVnpay()
-            //{
-            //    var response = _vnPayService.PaymentExecute(Request.Query);
-            //    if (response == null || response.VnPayResponseCode != "00")
-            //    {
-            //        // Thanh toán thất bại, chuyển hướng về giỏ hàng với thông báo lỗi
-            //        TempData["Message"] = $"Lỗi thanh toán VNPAY: {response?.VnPayResponseCode}";
-            //        return RedirectToAction("ViewCart");
-            //    }
-
-            //    // Thanh toán thành công
-            //    // Xóa giỏ hàng khỏi session tại đây
-            //    HttpContext.Session.Remove("Cart");
-
-            //    // Chuyển hướng đến trang thành công với các tham số trên query string
-            //    return RedirectToAction("VnPaySuccess", response);
-            //    //return Json(response);
-            //}
-
-
+           
+      
 
             public ActionResult ViewCart()
             {
@@ -127,31 +92,30 @@ namespace ShoseShop.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("HienThiSanPham", "SanPham", new { madongsanpham = sp.MaSP, maspct = sp.MaChiTietSP });
+                        return RedirectToAction("HienThiSanPham", "SanPham", new { maSanPham = sp.MaSP, maspct = sp.MaChiTietSP });
                     }
                 }
                 else
                 {
-                    SanPham dongSanPham = _product.GetSanpham(sp.MaSP);
-                    Mau mau = _mau.GetMau(sp.MaMau.ToString());
+                    SanPham SanPham = _product.GetSanpham(sp.MaSP);
+                    Mau mau = _mau.GetMau(sp.MaMau);
 
                 shoppingCart.Add(new ShoppingCartItem()
                     {
                         sanphamct = sp,
-                        Name = dongSanPham.TenSanPham,
+                        Name = SanPham.TenSanPham,
                         TenMau = mau.TenMau,
                         Quantity = 1,
                         tonkho = slton,
-                        GiaGoc = (decimal)dongSanPham.GiaSanPham,
-                        PhanTramGiam = kmRepo.GetKmProductToday(dongSanPham),
+                        GiaGoc = (decimal)SanPham.GiaSanPham,
+                        PhanTramGiam = kmRepo.GetKmProductToday(SanPham),
                         Size = tenSize,
                         Maspsize = _tkho.GetMaspsize(sp.MaChiTietSP, tenSize)
                     });
                 }
                        
             Session["Cart"] = shoppingCart;
-
-            return RedirectToAction("ViewCart");
+            return View(shoppingCart);
         }
 
             public ActionResult IncreaseOne(int Masp, string size)
@@ -159,7 +123,7 @@ namespace ShoseShop.Controllers
             
             string cartJson = Session["Cart"] as string;
 
-            // Khởi tạo một giỏ hàng rỗng
+            
             var shoppingCart = new List<ShoppingCartItem>();
 
             // Nếu có chuỗi JSON, chuyển nó về lại List
@@ -198,7 +162,7 @@ namespace ShoseShop.Controllers
             // Khởi tạo một giỏ hàng rỗng
             var shoppingCart = new List<ShoppingCartItem>();
 
-            // Nếu có chuỗi JSON, chuyển nó về lại List
+           
             if (!string.IsNullOrEmpty(cartJson))
             {
                 shoppingCart = JsonConvert.DeserializeObject<List<ShoppingCartItem>>(cartJson);
